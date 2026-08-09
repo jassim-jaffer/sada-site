@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>sāda — see the place, hear the story</title>
+<meta name="description" content="Audio exploration in Oman. Guided walks, treasure hunts and point maps, told in the voices of the people who know a place best.">
+<meta property="og:title" content="sāda — see the place, hear the story">
+<meta property="og:description" content="Audio exploration in Oman. Guided walks, treasure hunts and point maps, in real voices.">
+<meta property="og:image" content="img/drum.jpg">
+<meta name="theme-color" content="#F5F3EE">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800&family=IBM+Plex+Sans+Arabic:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0F1A14; --paper:#F5F3EE; --tint:#EDEAE2; --lime:#C8E632;
+    --dim:#0F1A14A8; --mute:#0F1A146E; --rule:#0F1A1418;
+    --gut:clamp(20px,4.6vw,56px); --max:1280px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{background:var(--paper);color:var(--ink);font:400 17px/1.55 Archivo,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  img{display:block;max-width:100%}
+  .ar{font-family:"IBM Plex Sans Arabic",Archivo,sans-serif;font-weight:700}
+  .wrap{max-width:var(--max);margin:0 auto;padding-inline:var(--gut)}
+  .eyebrow{font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--mute)}
+  :focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+
+  /* ── listening point: the signature ── */
+  .lp{position:absolute;width:clamp(76px,9vw,116px);aspect-ratio:1;transform:translate(-50%,-50%);pointer-events:none;z-index:2}
+  .lp circle{fill:none;stroke:var(--lime);stroke-width:1.7;vector-effect:non-scaling-stroke}
+  .lp .core{fill:var(--lime);stroke:none}
+  .lp .r{transform-origin:50% 50%;opacity:0}
+  @keyframes ping{0%{transform:scale(.26);opacity:0}14%{opacity:1}100%{transform:scale(1);opacity:0}}
+  .lp.live .r{animation:ping 3.8s cubic-bezier(.16,.72,.3,1) infinite}
+  .lp.live .r:nth-of-type(2){animation-delay:1.05s}
+  .lp.live .r:nth-of-type(3){animation-delay:2.1s}
+  @media (prefers-reduced-motion:reduce){.lp.live .r{animation:none;opacity:.5}}
+
+  /* ── masthead ── */
+  .mast{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:22px 0 26px}
+  .lock{display:flex;align-items:center;gap:11px}
+  .lock svg{width:32px;height:32px}
+  .word{font-size:24px;font-weight:800;letter-spacing:-.05em;line-height:1}
+  .word-ar{font-size:19px;line-height:1;color:var(--dim)}
+  .mast .eyebrow{text-align:right}
+
+  /* ── hero ── */
+  .hero{padding-top:clamp(14px,2vw,26px)}
+  h1{font-size:clamp(44px,9.4vw,132px);line-height:.9;letter-spacing:-.058em;font-weight:800;text-wrap:balance}
+  h1 em{font-style:normal;color:var(--mute)}
+  .heroline{display:flex;gap:clamp(20px,4vw,56px);align-items:flex-end;justify-content:space-between;flex-wrap:wrap;margin-top:clamp(20px,3vw,34px);padding-bottom:clamp(18px,2.4vw,28px);border-bottom:1px solid var(--rule)}
+  .heroline p{font-size:clamp(16px,1.5vw,19px);color:var(--dim);max-width:46ch}
+  .avail{display:flex;align-items:center;gap:9px;font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;white-space:nowrap;padding-bottom:3px;border-bottom:2px solid var(--lime)}
+  .avail::before{content:"";width:7px;height:7px;background:var(--lime);border-radius:999px;flex:none}
+
+  .shot{position:relative;margin-top:clamp(24px,3.4vw,40px)}
+  .shot img{width:100%;aspect-ratio:3/2;object-fit:cover;object-position:50% 50%}
+  .cap{margin-top:10px;font-size:12px;color:var(--mute);letter-spacing:.01em}
+
+  /* ── ticker ── */
+  .ticker{margin-top:clamp(44px,6vw,78px);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:15px 0;overflow:hidden;white-space:nowrap}
+  .ticker-in{display:inline-flex;gap:0;animation:slide 46s linear infinite;will-change:transform}
+  .ticker span{font-size:13px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;padding-inline:22px;color:var(--dim)}
+  .ticker span::after{content:"·";margin-inline-start:22px;color:var(--lime)}
+  @keyframes slide{to{transform:translateX(-50%)}}
+  @media (prefers-reduced-motion:reduce){.ticker-in{animation:none}}
+
+  /* ── offerings ── */
+  .offer{padding-top:clamp(58px,8vw,110px)}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4.4vw,72px);align-items:center;padding:clamp(34px,5vw,72px) 0;border-bottom:1px solid var(--rule)}
+  .row.flip .fig{order:2}
+  .fig{position:relative}
+  .fig img{width:100%;aspect-ratio:4/3;object-fit:cover}
+  .row h2{font-size:clamp(28px,4.2vw,52px);line-height:1;letter-spacing:-.05em;font-weight:800;margin-top:10px}
+  .row p{margin-top:14px;color:var(--dim);font-size:clamp(15px,1.5vw,18px);max-width:36ch}
+
+  /* ── how (pins & audio) ── */
+  .how{display:grid;grid-template-columns:auto 1fr;gap:clamp(28px,5vw,80px);align-items:center;padding:clamp(52px,7vw,104px) 0;border-bottom:1px solid var(--rule)}
+  .how-mark{width:clamp(140px,19vw,246px);flex:none}
+  .how-mark svg{width:100%;height:auto}
+  .how h2{font-size:clamp(26px,3.8vw,46px);line-height:1.02;letter-spacing:-.048em;font-weight:800;margin-top:10px}
+  .how p{margin-top:14px;color:var(--dim);font-size:clamp(15px,1.5vw,18px);max-width:46ch}
+
+  /* ── voices ── */
+  .voices{padding:clamp(58px,8vw,116px) 0;display:grid;grid-template-columns:1.3fr 1fr;gap:clamp(26px,4.4vw,72px);align-items:end}
+  .voices h2{font-size:clamp(32px,5.6vw,72px);line-height:.96;letter-spacing:-.055em;font-weight:800}
+  .voices h2 mark{background:none;color:var(--ink);box-shadow:inset 0 -.34em 0 var(--lime)}
+  .voices p{color:var(--dim);font-size:clamp(15px,1.5vw,18px);max-width:38ch}
+  .voices p+p{margin-top:12px}
+
+  /* ── signup ── */
+  .signup{background:var(--tint);padding:clamp(34px,5vw,64px);display:grid;grid-template-columns:1fr auto;gap:clamp(20px,3vw,48px);align-items:center}
+  .signup h3{font-size:clamp(24px,3.2vw,40px);line-height:1.02;letter-spacing:-.045em;font-weight:800}
+  .signup p{color:var(--dim);margin-top:9px;font-size:15px;max-width:40ch}
+  form{display:flex;gap:9px;flex-wrap:wrap}
+  input[type=email]{font:400 16px Archivo,sans-serif;padding:14px 17px;min-width:246px;border:1px solid var(--rule);background:var(--paper);color:var(--ink);border-radius:0}
+  input[type=email]::placeholder{color:var(--mute)}
+  button{font:600 15px Archivo,sans-serif;padding:14px 24px;border:0;background:var(--ink);color:var(--paper);cursor:pointer;border-radius:0;transition:background .16s}
+  button:hover{background:#1c2b23}
+  .note{font-size:12px;color:var(--mute);margin-top:10px}
+  .tally{margin-top:16px;font-size:15px;color:var(--dim)}
+  .tally b{font-weight:800;font-size:19px;color:var(--ink);box-shadow:inset 0 -.32em 0 var(--lime);padding:0 2px}
+
+  /* ── footer ── */
+  footer{padding:clamp(40px,5vw,70px) 0 clamp(48px,6vw,80px);border-top:1px solid var(--rule);margin-top:clamp(44px,6vw,84px)}
+  .frow{display:flex;justify-content:space-between;gap:26px;flex-wrap:wrap;align-items:flex-end}
+  .small{font-size:12.5px;color:var(--mute);margin-top:12px;line-height:1.5}
+  .flinks{display:flex;gap:22px;flex-wrap:wrap;font-size:15px}
+  footer a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--rule);padding-bottom:3px;transition:border-color .16s}
+  footer a:hover{border-color:var(--lime)}
+
+  @media (max-width:840px){
+    .row,.voices,.signup,.how{grid-template-columns:1fr}
+    .how-mark{width:120px}
+    .row.flip .fig{order:0}
+    .signup{gap:22px}
+    .shot img{aspect-ratio:4/3}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="mast">
+    <div class="lock">
+      <svg viewBox="0 0 84 78" aria-hidden="true">
+        <g fill="none" stroke="#0F1A14" stroke-width="2.2">
+          <circle cx="40" cy="38" r="30"/><circle cx="40.9" cy="37.2" r="26"/><circle cx="41.8" cy="36.3" r="22"/>
+          <circle cx="42.6" cy="35.2" r="17"/><circle cx="43.3" cy="34.2" r="13"/>
+        </g>
+        <circle cx="44.3" cy="35.2" r="8.6" fill="#C8E632"/><circle cx="41" cy="39" r="2.2" fill="#0F1A14"/>
+      </svg>
+      <span class="word">sāda</span>
+      <span class="word-ar ar">صدى</span>
+    </div>
+    <span class="eyebrow">Audio exploration · Oman</span>
+  </div>
+
+  <header class="hero">
+    <h1>See the place,<br><em>hear the story.</em></h1>
+    <div class="heroline">
+      <p>Guided walks, treasure hunts and point maps — told by the people who know a place best, and playing as you arrive.</p>
+      <span class="avail">Coming to iOS &amp; Android</span>
+    </div>
+
+    <figure class="shot">
+      <img src="img/market.jpg" alt="Men seated together at the goat market in Nizwa, a young goat standing in front of them">
+      <svg class="lp live" style="left:56%;top:33%" viewBox="0 0 100 100" aria-hidden="true">
+        <circle class="r" cx="50" cy="50" r="46"/><circle class="r" cx="50" cy="50" r="46"/><circle class="r" cx="50" cy="50" r="46"/>
+        <circle class="core" cx="50" cy="50" r="4.2"/>
+      </svg>
+      <figcaption class="cap">Friday morning, the goat market at Nizwa. Every one of them has the story.</figcaption>
+    </figure>
+  </header>
+</div>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-in">
+    <span>Muttrah</span><span>Nizwa</span><span>Old Muscat</span><span>Misfat al Abriyeen</span><span>Sur</span><span>Jebel Akhdar</span><span>Bahla</span><span>Al Hamra</span><span>Wahiba</span><span>Salalah</span>
+    <span>Muttrah</span><span>Nizwa</span><span>Old Muscat</span><span>Misfat al Abriyeen</span><span>Sur</span><span>Jebel Akhdar</span><span>Bahla</span><span>Al Hamra</span><span>Wahiba</span><span>Salalah</span>
+  </div>
+</div>
+
+<main class="wrap offer">
+  <span class="eyebrow">What you can do with it</span>
+
+  <section class="row">
+    <div class="fig">
+      <img src="img/drum.jpg" alt="A drummer at a fort in Oman holding a rope-tensioned drum, men in blue dishdashas beside him">
+      <svg class="lp" style="left:41%;top:58%" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="34"/><circle cx="50" cy="50" r="18"/><circle class="core" cx="50" cy="50" r="4.2"/></svg>
+    </div>
+    <div>
+      <span class="eyebrow">Guided walks</span>
+      <h2>Walk it.<br>It tells you.</h2>
+      <p>Follow a route at your own pace. The audio begins as you reach each stop — your phone stays in your pocket, your eyes stay on the place.</p>
+    </div>
+  </section>
+
+  <section class="row flip">
+    <div class="fig">
+      <img src="img/camel.jpg" alt="A boy standing beside a camel at an Omani livestock market">
+      <svg class="lp" style="left:63%;top:44%" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="34"/><circle cx="50" cy="50" r="18"/><circle class="core" cx="50" cy="50" r="4.2"/></svg>
+    </div>
+    <div>
+      <span class="eyebrow">Treasure hunts</span>
+      <h2>Follow<br>the sound.</h2>
+      <p>A trail of places to find, one clue at a time. No blue dot to follow — the sound gets warmer as you get closer.</p>
+    </div>
+  </section>
+
+  <section class="row">
+    <div class="fig">
+      <img src="img/camels.jpg" alt="Handlers leading decorated camels at a camel market in Oman">
+      <svg class="lp" style="left:72%;top:47%" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="34"/><circle cx="50" cy="50" r="18"/><circle class="core" cx="50" cy="50" r="4.2"/></svg>
+    </div>
+    <div>
+      <span class="eyebrow">Point maps</span>
+      <h2>Wander.<br>Listen where you stand.</h2>
+      <p>A scatter of places with no set order. Open the map, follow whatever catches you, and hear what happened right there.</p>
+    </div>
+  </section>
+
+  <section class="how">
+    <div class="how-mark">
+      <svg viewBox="0 0 100 100" aria-hidden="true">
+        <g fill="none" stroke="#0F1A14" stroke-width="1.7">
+          <circle cx="48" cy="50" r="42"/><circle cx="49.1" cy="49" r="36"/><circle cx="50.2" cy="47.9" r="30"/>
+          <circle cx="51.2" cy="46.6" r="23"/><circle cx="52" cy="45.4" r="17"/>
+        </g>
+        <circle cx="52" cy="45.4" r="11.6" fill="#C8E632"/>
+        <circle cx="48" cy="50" r="3" fill="#0F1A14"/>
+      </svg>
+    </div>
+    <div>
+      <span class="eyebrow">Pins &amp; audio</span>
+      <h2>A pin is a place<br>with something to hear.</h2>
+      <p>Every ring on the map marks a spot where a voice was left — a story, a memory, a walk that starts here. Tap it and it plays exactly where it happened, with no headphones-required, screen-staring ceremony.</p>
+      <p>The closer you stand, the more the place has to say.</p>
+    </div>
+  </section>
+
+  <section class="voices">
+    <h2>Real voices,<br><mark>in real places.</mark></h2>
+    <div>
+      <p>Every walk, hunt and map on sāda is told by people — guides, historians, fishermen, neighbours — not by a machine reading a script.</p>
+      <p>And you can leave a voice of your own at a place, so what the next person hears keeps growing.</p>
+    </div>
+  </section>
+
+  <section class="signup">
+    <div>
+      <h3>Be first to hear it.</h3>
+      <p>We'll email you once, when sāda is live on the stores. Nothing else.</p>
+      <p class="tally" id="tally" hidden><b id="tallyN">—</b> people are already waiting.</p>
+    </div>
+    <div>
+      <form id="signup" novalidate>
+        <input type="email" id="email" name="email" placeholder="your@email.com" aria-label="Email address" required autocomplete="email">
+        <button type="submit" id="go">Notify me</button>
+      </form>
+      <p class="note" id="note">No spam, no sharing. One email, when it's live.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <div class="frow">
+    <div>
+      <div class="lock">
+        <svg viewBox="0 0 84 78" style="width:26px;height:26px" aria-hidden="true">
+          <g fill="none" stroke="#0F1A14" stroke-width="2.4">
+            <circle cx="40" cy="38" r="30"/><circle cx="41.8" cy="36.3" r="22"/><circle cx="43.3" cy="34.2" r="13"/>
+          </g>
+          <circle cx="44.3" cy="35.2" r="8.6" fill="#C8E632"/>
+        </svg>
+        <span class="word" style="font-size:18px">sāda</span>
+        <span class="word-ar ar" style="font-size:15px">صدى</span>
+      </div>
+      <p class="small">By Hakawati LLC · Muscat, Sultanate of Oman<br>Photographs from Oman by Jasim Al Lawati.</p>
+    </div>
+    <div class="flinks">
+      <a href="privacy.html">Privacy</a>
+      <a href="support.html">Support</a>
+      <a href="mailto:jassim@dauboman.com">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Live waitlist tally. Reads a count-only function — never rows, never emails.
+// Requires public.waitlist_count() with execute granted to anon (see STORE SUBMISSION notes).
+(function () {
+  var URL  = 'https://imbppnlkomsugmmzfynb.supabase.co';
+  var ANON = 'sb_publishable_ZnV2CrnmwppnVmOGzkql4w_kMPBmehV';
+  var MIN  = 25;                                       // don't publish a number that undersells
+
+  fetch(URL + '/rest/v1/rpc/waitlist_count', {
+    method: 'POST',
+    headers: { 'apikey': ANON, 'Authorization': 'Bearer ' + ANON, 'Content-Type': 'application/json' },
+    body: '{}'
+  })
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (n) {
+      if (typeof n !== 'number' || n < MIN) return;     // no number, no claim
+      document.getElementById('tallyN').textContent = n.toLocaleString();
+      document.getElementById('tally').hidden = false;
+    })
+    .catch(function () { /* stay hidden rather than show a wrong number */ });
+
+  // Signup → waitlist_entries. The table's trigger upserts to HubSpot on insert.
+  var form = document.getElementById('signup'),
+      mail = document.getElementById('email'),
+      go   = document.getElementById('go'),
+      note = document.getElementById('note');
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var v = mail.value.trim();
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)) { note.textContent = 'That email doesn’t look right — check it and try again.'; mail.focus(); return; }
+
+    go.disabled = true; go.textContent = 'Adding…';
+    fetch(URL + '/rest/v1/waitlist_entries', {
+      method: 'POST',
+      headers: { 'apikey': ANON, 'Authorization': 'Bearer ' + ANON, 'Content-Type': 'application/json', 'Prefer': 'resolution=merge-duplicates' },
+      body: JSON.stringify({ email: v })
+    })
+      .then(function (r) {
+        if (r.ok) {
+          form.innerHTML = '<p style="font-weight:600">You’re on the list. We’ll be in touch once.</p>';
+          note.textContent = '';
+        } else {
+          go.disabled = false; go.textContent = 'Notify me';
+          note.textContent = 'That didn’t save. Try again, or email jassim@dauboman.com.';
+        }
+      })
+      .catch(function () {
+        go.disabled = false; go.textContent = 'Notify me';
+        note.textContent = 'No connection. Try again in a moment.';
+      });
+  });
+})();
+</script>
+
+</body>
+</html>
