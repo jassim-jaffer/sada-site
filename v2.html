@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Sada — Hear the place</title>
-<meta name="description" content="Self-guided audio exploration in the Sultanate of Oman. Listen to voices linked to the exact place where you stand.">
+<meta name="description" content="Audio exploration. Listen to voices linked to the exact place where you stand.">
 <meta property="og:title" content="Sada — Hear the place">
-<meta property="og:description" content="Self-guided audio exploration in the Sultanate of Oman.">
+<meta property="og:description" content="Audio exploration.">
 <meta property="og:image" content="img/market.jpg">
 <meta name="theme-color" content="#F5F3EE">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,125 +15,129 @@
 <style>
   :root{
     --ink:#0F1A14; --paper:#F5F3EE; --lime:#C8E632; --clay:#C0774F;
-    --tint:#EDEAE2; --dim:#0F1A14A8; --mute:#0F1A146E; --rule:#0F1A1418;
-    --gut:clamp(20px,4.6vw,56px); --max:1240px;
+    --tint:#EAE7DF; --dim:#0F1A14A8; --mute:#0F1A1470; --rule:#0F1A1418;
+    --gut:clamp(26px,7vw,112px); --max:1200px; --r:14px;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
-  body{background:var(--paper);color:var(--ink);font:400 17px/1.55 Archivo,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  body{background:var(--paper);color:var(--ink);font:400 17px/1.6 Archivo,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
   img{display:block;max-width:100%}
   .ar{font-family:"IBM Plex Sans Arabic",Archivo,sans-serif;font-weight:700}
   .wrap{max-width:var(--max);margin:0 auto;padding-inline:var(--gut)}
-  .eyebrow{font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--mute)}
   :focus-visible{outline:2px solid var(--ink);outline-offset:3px}
-  h1,h2,h3{letter-spacing:-.045em;font-weight:800;line-height:1.02;text-wrap:balance}
+  h1,h2,h3{letter-spacing:-.04em;font-weight:800;line-height:1.04}
 
-  .btn{display:inline-block;font:600 16px Archivo,sans-serif;padding:15px 28px;border:0;background:var(--ink);color:var(--paper);cursor:pointer;border-radius:999px;transition:background .16s,transform .16s;text-decoration:none}
-  .btn:hover{background:#1c2b23;transform:translateY(-1px)}
+  .btn{display:inline-block;font:600 16px Archivo,sans-serif;padding:15px 26px;border:0;background:var(--ink);color:var(--paper);cursor:pointer;border-radius:var(--r);transition:background .16s;text-decoration:none}
+  .btn:hover{background:#1c2b23}
   .btn-lime{background:var(--lime);color:var(--ink)}
-  .btn-lime:hover{background:#d4ef4e}
+  .btn-lime:hover{background:#d7f04f}
 
-  /* masthead */
-  .mast{position:absolute;top:0;left:0;right:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:20px var(--gut)}
-  .mast .lock{background:var(--paper);border-radius:999px;padding:9px 20px;display:flex;align-items:center}
-  .mast .lock img{height:30px;width:auto;display:block}
-  .burger{background:none;border:0;cursor:pointer;width:46px;height:46px;display:grid;place-content:center;gap:5px;border-radius:999px;background:#F5F3EEE0;backdrop-filter:blur(6px)}
-  .burger span{display:block;width:20px;height:2px;background:var(--ink)}
-  .nav{position:fixed;inset:0;background:var(--paper);z-index:40;display:none;flex-direction:column;align-items:center;justify-content:center;gap:22px}
+  /* ── header bar: paper, logo out of any container ── */
+  .mast{position:relative;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:20px var(--gut) 18px;max-width:var(--max);margin:0 auto}
+  .mast .logo{height:62px;width:auto}
+  .burger{background:none;border:1px solid var(--rule);cursor:pointer;width:48px;height:48px;border-radius:var(--r);display:grid;place-content:center;gap:5px;transition:border-color .16s}
+  .burger:hover{border-color:#0F1A1440}
+  .burger span{display:block;width:19px;height:2px;background:var(--ink)}
+  .nav{position:fixed;inset:0;background:var(--paper);z-index:40;display:none;flex-direction:column;align-items:center;justify-content:center;gap:20px}
   .nav.open{display:flex}
-  .nav a{font-size:clamp(26px,5vw,44px);font-weight:800;letter-spacing:-.04em;color:var(--ink);text-decoration:none}
+  .nav a{font-size:clamp(25px,4.6vw,40px);font-weight:800;letter-spacing:-.04em;color:var(--ink);text-decoration:none}
   .nav a:hover{color:var(--clay)}
-  .nav .close{position:absolute;top:22px;right:var(--gut);font-size:30px;background:none;border:0;cursor:pointer;line-height:1}
+  .nav .close{position:absolute;top:24px;right:var(--gut);font-size:30px;background:none;border:0;cursor:pointer;line-height:1}
 
-  /* hero */
-  .hero{position:relative;min-height:88vh;display:flex;align-items:flex-end;isolation:isolate}
-  .hero img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 45%;z-index:-2}
-  .hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,#0F1A1455 0%,#0F1A1400 32%,#0F1A1433 62%,#0F1A14D9 100%)}
-  .hero-in{padding:0 var(--gut) clamp(46px,7vw,86px);max-width:var(--max);margin:0 auto;width:100%;color:var(--paper)}
-  .hero h1{font-size:clamp(52px,11vw,146px);line-height:.88;letter-spacing:-.055em}
-  .hero p{margin-top:18px;font-size:clamp(17px,2vw,23px);max-width:28ch;color:#F5F3EEE6}
-  .hero .btn{margin-top:clamp(22px,3vw,32px)}
+  /* ── hero ── */
+  .hero{position:relative;isolation:isolate;min-height:min(74vh,660px);display:flex;align-items:flex-end;margin:0 var(--gut);border-radius:22px;overflow:hidden}
+  .hero img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 22%;z-index:-2}
+  .hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,#0F1A1400 38%,#0F1A1459 66%,#0F1A14E0 100%)}
+  .hero-in{padding:clamp(30px,4vw,52px);color:var(--paper);width:100%}
+  .hero h1{font-size:clamp(46px,8.4vw,112px);line-height:.92;letter-spacing:-.05em}
+  .hero p{margin-top:14px;font-size:clamp(17px,2vw,22px);color:#F5F3EEE0}
+  .hero .btn{margin-top:clamp(20px,2.6vw,30px)}
 
-  /* sections */
-  section{padding:clamp(62px,9vw,124px) 0}
-  .sec-head{max-width:22ch;margin-bottom:clamp(30px,4vw,54px)}
-  .sec-head h2{font-size:clamp(34px,5.4vw,66px)}
+  /* ── sections ── */
+  section{padding:clamp(66px,9vw,132px) 0}
+  h2.title{font-size:clamp(32px,4.6vw,58px);white-space:nowrap;margin-bottom:clamp(34px,4.5vw,58px)}
 
-  .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(22px,3vw,44px)}
-  .card .mark{width:52px;height:52px;margin-bottom:18px}
-  .card p{color:var(--dim);font-size:16.5px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,4.5vw,66px)}
+  .card .mark{width:50px;height:50px;margin-bottom:16px}
+  .card p{color:var(--dim);font-size:17px;max-width:40ch}
   .card p b{color:var(--ink);font-weight:800}
   .card p i{font-style:italic;color:var(--ink)}
 
-  .center{text-align:center;margin-top:clamp(34px,5vw,60px)}
+  .center{text-align:center;margin-top:clamp(40px,5vw,66px)}
 
-  /* how it works */
-  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(24px,3.4vw,52px)}
-  .step figure{background:var(--tint);border-radius:18px;overflow:hidden;aspect-ratio:4/5;display:grid;place-items:center;padding:26px}
-  .step figure img{width:auto;height:100%;object-fit:contain;border-radius:10px;box-shadow:0 16px 40px #0F1A1426}
-  .step .n{display:inline-grid;place-content:center;width:30px;height:30px;border-radius:999px;background:var(--lime);font-size:14px;font-weight:800;margin:18px 0 10px}
-  .step p{color:var(--dim);font-size:16.5px;max-width:34ch}
-  .coming{margin-top:clamp(30px,4vw,52px);text-align:center;font-size:14px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+  /* ── how it works ── */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(26px,3.6vw,56px)}
+  .step figure{background:var(--tint);border-radius:18px;overflow:hidden;aspect-ratio:4/5;display:grid;place-items:center;padding:24px}
+  .step figure img{width:auto;height:100%;object-fit:contain;border-radius:10px;box-shadow:0 14px 36px #0F1A1426}
+  .step .n{display:inline-grid;place-content:center;width:30px;height:30px;border-radius:9px;background:var(--lime);font-size:14px;font-weight:800;margin:20px 0 10px}
+  .step p{color:var(--dim);font-size:16.5px;max-width:32ch}
+  .coming{margin-top:clamp(34px,4vw,56px);text-align:center;font-size:13.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
 
-  /* supported by */
-  .supported{background:var(--tint)}
-  .logos{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:clamp(26px,5vw,70px);margin-top:34px}
-  .logo-ph{min-width:190px;height:74px;display:grid;place-items:center;border:1px dashed #0F1A1433;border-radius:12px;padding:0 24px;font-weight:600;color:var(--mute);font-size:15px;background:#F5F3EE80}
+  /* ── why sada ── */
+  .why{background:var(--tint)}
+  .why .in{display:grid;grid-template-columns:auto 1fr;gap:clamp(30px,5vw,80px);align-items:center}
+  .why .glyph{font-size:clamp(66px,9vw,128px);line-height:1;color:var(--ink)}
+  .why h2{font-size:clamp(30px,4.2vw,52px);margin-bottom:18px}
+  .why p{color:var(--dim);font-size:clamp(16.5px,1.8vw,19.5px);max-width:50ch}
+  .why p+p{margin-top:13px}
 
-  /* founders */
-  .founders{display:grid;grid-template-columns:1fr 1fr;gap:clamp(26px,4vw,64px);margin-top:clamp(28px,4vw,50px)}
-  .person .shot{aspect-ratio:1;background:var(--tint);border-radius:18px;display:grid;place-items:center;color:var(--mute);font-size:14px;border:1px dashed #0F1A1430;margin-bottom:20px}
+  /* ── supported by ── */
+  .logos{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:clamp(24px,4vw,64px);margin-top:36px}
+  .logo-ph{min-width:188px;height:76px;display:grid;place-items:center;border:1px dashed #0F1A1433;border-radius:var(--r);padding:0 24px;font-weight:600;color:var(--mute);font-size:15px}
+
+  /* ── founders ── */
+  .founders{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,4.5vw,70px);margin-top:clamp(32px,4vw,54px)}
+  .person .shot{aspect-ratio:1;background:var(--tint);border-radius:18px;display:grid;place-items:center;color:var(--mute);font-size:14px;border:1px dashed #0F1A1430;margin-bottom:22px}
   .person h3{font-size:clamp(21px,2.4vw,27px)}
-  .person .role{font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--clay);margin:7px 0 12px}
+  .person .role{font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--clay);margin:8px 0 13px}
   .person p{color:var(--dim);font-size:16px}
   .person p+p{margin-top:11px}
-  .li{display:inline-flex;align-items:center;gap:8px;margin-top:16px;font-size:15px;font-weight:600;color:var(--ink);text-decoration:none;border-bottom:2px solid var(--lime);padding-bottom:2px}
-  .intro{color:var(--dim);font-size:clamp(16px,1.7vw,19px);max-width:62ch}
+  .li{display:inline-flex;align-items:center;gap:8px;margin-top:18px;font-size:15px;font-weight:600;color:var(--ink);text-decoration:none;border-bottom:2px solid var(--lime);padding-bottom:2px}
+  .intro{color:var(--dim);font-size:clamp(16.5px,1.8vw,19.5px);max-width:60ch}
 
-  /* footer */
-  footer{background:var(--ink);color:var(--paper);padding:clamp(52px,7vw,96px) 0 clamp(34px,4vw,54px)}
-  footer h3{font-size:clamp(26px,3.6vw,42px);max-width:16ch}
-  .frow{display:grid;grid-template-columns:1.2fr 1fr;gap:clamp(28px,4vw,60px);align-items:start}
-  footer .btn{margin-top:22px}
-  .fmeta{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center;margin-top:clamp(40px,5vw,70px);padding-top:26px;border-top:1px solid #F5F3EE22;font-size:13.5px;color:#F5F3EE9E}
+  /* ── footer ── */
+  footer{background:var(--ink);color:var(--paper);padding:clamp(56px,7vw,100px) 0 clamp(34px,4vw,54px);margin-top:clamp(20px,3vw,40px)}
+  footer h3{font-size:clamp(27px,3.6vw,44px);max-width:15ch}
+  .frow{display:grid;grid-template-columns:1.2fr auto;gap:clamp(30px,4vw,60px);align-items:start}
+  footer .btn{margin-top:24px}
+  .fmeta{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center;margin-top:clamp(44px,5vw,76px);padding-top:26px;border-top:1px solid #F5F3EE24;font-size:13.5px;color:#F5F3EE9E}
   .fmeta a{color:#F5F3EE;text-decoration:none;border-bottom:1px solid #F5F3EE3D;padding-bottom:2px}
   .flinks{display:flex;gap:20px;flex-wrap:wrap}
   .ig{display:inline-flex;align-items:center;gap:9px;color:var(--paper);text-decoration:none;font-weight:600}
   .ig svg{width:21px;height:21px}
 
-  /* modal */
-  .modal{position:fixed;inset:0;z-index:60;display:none;align-items:center;justify-content:center;padding:20px;background:#0F1A14A8;backdrop-filter:blur(3px)}
+  /* ── modal ── */
+  .modal{position:fixed;inset:0;z-index:60;display:none;align-items:center;justify-content:center;padding:20px;background:#0F1A14A8}
   .modal.open{display:flex}
-  .sheet{background:var(--paper);border-radius:22px;padding:clamp(26px,4vw,42px);max-width:430px;width:100%;position:relative}
+  .sheet{background:var(--paper);border-radius:20px;padding:clamp(28px,4vw,44px);max-width:440px;width:100%;position:relative}
   .sheet h3{font-size:clamp(23px,3vw,30px);max-width:17ch}
-  .sheet .x{position:absolute;top:14px;right:16px;background:none;border:0;font-size:26px;cursor:pointer;line-height:1;color:var(--mute)}
-  .field{margin-top:14px}
+  .sheet .x{position:absolute;top:16px;right:18px;background:none;border:0;font-size:26px;cursor:pointer;line-height:1;color:var(--mute)}
+  .field{margin-top:15px}
   .field label{display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin-bottom:6px}
   .field input{width:100%;font:400 16px Archivo,sans-serif;padding:13px 15px;border:1px solid #0F1A1426;background:#fff;color:var(--ink);border-radius:10px}
-  .field input:focus{outline:2px solid var(--ink);outline-offset:1px}
   .two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-  .sheet .btn{width:100%;margin-top:18px;text-align:center}
-  .small{font-size:12.5px;color:var(--mute);margin-top:14px;line-height:1.5}
+  .sheet .btn{width:100%;margin-top:20px}
+  .small{font-size:12.5px;color:var(--mute);margin-top:15px;line-height:1.5}
   .msg{font-size:14.5px;margin-top:12px;font-weight:600}
 
   @media (max-width:900px){
-    .grid4{grid-template-columns:1fr 1fr}
     .steps{grid-template-columns:1fr}
     .step figure{aspect-ratio:16/10}
-    .founders,.frow{grid-template-columns:1fr}
+    .founders,.frow,.why .in{grid-template-columns:1fr}
+    h2.title{white-space:normal}
   }
   @media (max-width:560px){
-    .grid4{grid-template-columns:1fr}
+    .grid2{grid-template-columns:1fr}
     .two{grid-template-columns:1fr}
+    .hero{margin:0;border-radius:0}
   }
   @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
 <body>
 
-<!-- ─── header ─── -->
 <header class="mast">
-  <span class="lock"><img src="img/brand/lockup.svg" alt="Sada"></span>
+  <img class="logo" src="img/brand/logo.svg" alt="Sada">
   <button class="burger" id="burger" aria-label="Open menu"><span></span><span></span><span></span></button>
 </header>
 
@@ -141,6 +145,7 @@
   <button class="close" id="navClose" aria-label="Close menu">&times;</button>
   <a href="#what">What is Sada?</a>
   <a href="#how">How it works</a>
+  <a href="#why">Why Sada</a>
   <a href="#founders">Founders</a>
   <a href="privacy.html">Privacy</a>
   <a href="support.html">Support</a>
@@ -152,15 +157,15 @@
   <img class="bg" src="img/market.jpg" alt="Men seated together at the goat market in Nizwa">
   <div class="hero-in">
     <h1>Hear the place</h1>
-    <p>Self-guided audio exploration in the Sultanate of Oman.</p>
+    <p>Audio exploration</p>
     <button class="btn btn-lime" data-open>Sign-up to the waitlist!</button>
   </div>
 </div>
 
 <!-- ─── 2. what is sada ─── -->
 <section id="what" class="wrap">
-  <div class="sec-head"><h2>What is Sada?</h2></div>
-  <div class="grid4">
+  <h2 class="title">What is Sada?</h2>
+  <div class="grid2">
     <div class="card">
       <svg class="mark" viewBox="0 0 100 100" aria-hidden="true"><g fill="none" stroke="#0F1A14" stroke-width="5"><circle cx="50" cy="50" r="44"/><circle cx="50" cy="50" r="28"/></g><circle cx="50" cy="50" r="13" fill="#C8E632"/></svg>
       <p><b>An audio-first storytelling app</b>. Listen to voices linked to the exact place where you stand. Stories you won't find in guide books.</p>
@@ -184,7 +189,7 @@
 <!-- ─── 3. how it works ─── -->
 <section id="how" style="background:var(--tint)">
   <div class="wrap">
-    <div class="sec-head"><h2>How it works</h2></div>
+    <h2 class="title">How it works</h2>
     <div class="steps">
       <div class="step">
         <figure><img src="img/brand/step-explore.png" alt="The Sada app showing experiences near you"></figure>
@@ -208,9 +213,9 @@
 </section>
 
 <!-- ─── 4. supported by ─── -->
-<section class="supported">
+<section>
   <div class="wrap" style="text-align:center">
-    <h2 style="font-size:clamp(26px,3.4vw,40px)">Supported by</h2>
+    <h2 class="title" style="margin-bottom:0">Supported by</h2>
     <div class="logos">
       <div class="logo-ph">Omran</div>
       <div class="logo-ph">Al Jaber</div>
@@ -219,9 +224,21 @@
   </div>
 </section>
 
-<!-- ─── 5. founders ─── -->
+<!-- ─── 5. why sada  [COPY IS A DRAFT — awaiting Roshni/Jasim] ─── -->
+<section id="why" class="why">
+  <div class="wrap in">
+    <div class="glyph ar">صدى</div>
+    <div>
+      <h2>Why Sada</h2>
+      <p>Sada means echo. It is the Arabic word for the sound a place gives back to you — صدى.</p>
+      <p>Every tour, walk and quest is told by someone with a real connection to where you are standing: historians, artists, wellbeing practitioners, and people whose families have been there for generations. You hear them in the place their story belongs to, not on a screen somewhere else.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── 6. founders ─── -->
 <section id="founders" class="wrap">
-  <div class="sec-head" style="max-width:none"><h2>Meet the Founders</h2></div>
+  <h2 class="title">Meet the Founders</h2>
   <p class="intro">Say hello to Jasim Al Lawati and Roshni Goyate, Sada's co-founders, and husband-wife duo. Together they bring over 40 years' experience in storytelling, through TV, film, tech, marketing, poetry and more.</p>
   <div class="founders">
     <div class="person">
@@ -243,7 +260,6 @@
   </div>
 </section>
 
-<!-- ─── footer ─── -->
 <footer>
   <div class="wrap">
     <div class="frow">
@@ -251,7 +267,7 @@
         <h3>Be the first to know when we launch</h3>
         <button class="btn btn-lime" data-open>Join the waitlist</button>
       </div>
-      <div style="justify-self:end">
+      <div>
         <a class="ig" href="https://instagram.com/sada_explore" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1.2" fill="currentColor" stroke="none"/></svg>
           sada_explore
@@ -270,7 +286,6 @@
   </div>
 </footer>
 
-<!-- ─── waitlist modal ─── -->
 <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
   <div class="sheet">
     <button class="x" id="mClose" aria-label="Close">&times;</button>
@@ -319,9 +334,8 @@
 
     go.disabled = true; go.textContent = 'Signing you up…'; msg.textContent = '';
 
-    // NOTE: waitlist_entries currently stores EMAIL ONLY.
-    // first_name / last_name are collected here but cannot be saved until
-    // those two columns exist. Sending them now would reject the insert.
+    // waitlist_entries stores EMAIL ONLY. first/last name cannot be saved
+    // until those two columns exist — sending them now rejects the insert.
     fetch(URL + '/rest/v1/waitlist_entries', {
       method:'POST',
       headers:{ 'apikey':ANON, 'Authorization':'Bearer '+ANON, 'Content-Type':'application/json', 'Prefer':'resolution=merge-duplicates' },
