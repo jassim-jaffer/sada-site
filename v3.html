@@ -30,13 +30,15 @@
   .wrap{max-width:1560px;margin:0 auto}
 
   /* ── header: paper bar so the logo keeps its own colours ── */
-  header{background:var(--paper);color:var(--ink);display:flex;align-items:center;justify-content:space-between;gap:28px;padding:14px 4%}
-  /* approved stacked logo — the horizontal version is with the design window */
-  header .logo{height:58px;width:auto}
+  /* the approved horizontal logo, option B (LOGO pack, 4 Oct), colour-for-ink, transparent —
+     sitting straight on the page: no bar, panel, tile or border behind it.
+     Sized so it never drops under the pack's 150px minimum width. */
+  header{display:flex;align-items:center;justify-content:space-between;gap:28px;padding:18px 4%;border-bottom:1px solid var(--line)}
+  header .logo{height:64px;width:auto;display:block}
   header nav{display:flex;gap:28px;font-size:14px}
-  header nav a:hover{color:var(--clay)}
-  .app-link{background:var(--ink);color:var(--paper);padding:11px 18px;border-radius:8px;font-size:14px;font-weight:600}
-  .app-link:hover{background:#1c2b23}
+  header nav a:hover{color:var(--lime)}
+  .app-link{background:var(--lime);color:var(--ink);padding:11px 18px;border-radius:8px;font-size:14px;font-weight:600}
+  .app-link:hover{background:#d7f04f}
 
   /* ── hero ── */
   .hero{padding:40px 4% 76px;position:relative}
@@ -171,7 +173,7 @@
 <div class="wrap">
 
 <header>
-  <img class="logo" src="img/brand/logo.svg" alt="Sada">
+  <img class="logo" src="img/brand/sada-horizontal-B-colour-for-ink.svg" alt="Sada" width="151" height="64">
   <nav>
     <a href="#doors">Experiences</a>
     <a href="#how">How it works</a>
