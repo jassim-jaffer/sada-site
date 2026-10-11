@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sada — wireframe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0F1A14; --lime:#C8E632; --paper:#F5F3EE; --clay:#C0774F;
+    --surface:#FFFFFF; --tint:#EEECE5; --muted:#5A6B5F; --line:#DCD9CF;
+    --sans:"Archivo",-apple-system,system-ui,sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+    --arabic:"IBM Plex Sans Arabic","Geeza Pro",sans-serif;
+    --gut:clamp(22px,6vw,96px);
+    --spine:clamp(26px,5.4vw,78px);   /* where the route line sits */
+    --max:1180px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+  body{background:var(--paper);color:var(--ink);font:400 17px/1.6 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  img{display:block;max-width:100%}
+  :focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+
+  /* ── the route: one continuous line down the page, the way the mark is one continuous line ── */
+  .route{position:absolute;left:var(--spine);top:0;bottom:0;width:1px;background:var(--ink);opacity:.16;z-index:0}
+  .page{position:relative;max-width:var(--max);margin:0 auto;padding-inline:var(--gut)}
+  .page>*{position:relative;z-index:1}
+
+  /* a stop on the route */
+  .stop{position:relative;padding:clamp(64px,9vw,132px) 0 0}
+  .stop::before{                      /* the node */
+    content:"";position:absolute;left:calc(var(--spine) - var(--gut) - 4.5px);top:clamp(64px,9vw,132px);
+    width:9px;height:9px;border-radius:50%;background:var(--paper);box-shadow:0 0 0 1.5px var(--ink);
+  }
+  .stop.start::before{background:var(--lime);box-shadow:0 0 0 1.5px var(--ink)}
+  .stop.end::before{background:var(--clay);box-shadow:0 0 0 1.5px var(--ink)}
+  .lede{margin-left:calc(var(--spine) - var(--gut) + 30px)}
+
+  .label{font:500 11.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:flex;gap:14px;align-items:baseline}
+  .label .n{color:var(--ink)}
+
+  h1,h2,h3{font-weight:600;letter-spacing:-.02em;line-height:1.08}
+  h2{font-size:clamp(28px,3.6vw,44px);margin-top:16px}
+  h3{font-size:clamp(19px,2vw,23px)}
+  p{color:var(--muted);font-size:clamp(16px,1.6vw,18px);max-width:54ch}
+  p+p{margin-top:12px}
+  .lead{color:var(--ink);font-size:clamp(17px,1.9vw,21px);max-width:46ch}
+
+  /* ── wireframe placeholders, using the brand's own placeholder convention ── */
+  .ph{border:1px dashed var(--clay);border-radius:4px;display:grid;place-items:center;text-align:center;
+      font:500 11.5px/1.5 var(--mono);color:var(--clay);letter-spacing:.06em;padding:18px;background:#C0774F08}
+  .ph small{display:block;color:var(--muted);letter-spacing:0;font-size:10.5px;margin-top:5px;text-transform:none}
+
+  .btn{display:inline-block;font:500 15.5px var(--sans);padding:14px 22px;border:1px solid var(--ink);
+       background:var(--ink);color:var(--paper);border-radius:8px;cursor:pointer;text-decoration:none}
+  .btn:hover{background:#1b2a22}
+  .btn.ghost{background:transparent;color:var(--ink)}
+  .btn.ghost:hover{background:#0F1A140A}
+
+  /* ── masthead ── */
+  .mast{position:relative;z-index:2;display:flex;align-items:flex-start;justify-content:space-between;
+        gap:20px;max-width:var(--max);margin:0 auto;padding:26px var(--gut) 0}
+  .mast .logo{height:58px;width:auto}
+  .menu{font:500 11.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink);
+        background:none;border:0;border-bottom:1px solid var(--ink);padding:0 0 4px;cursor:pointer}
+
+  /* ── hero ── */
+  .hero{padding-top:clamp(42px,6vw,86px)}
+  .hero h1{font-size:clamp(50px,9.4vw,124px);line-height:.94;letter-spacing:-.035em;font-weight:600}
+  .hero .sub{margin-top:18px;font:400 clamp(17px,2vw,21px) var(--sans);color:var(--muted)}
+  .hero .cta{margin-top:clamp(24px,3vw,34px);display:flex;gap:12px;flex-wrap:wrap}
+  .hero .shot{margin-top:clamp(34px,4.6vw,64px);aspect-ratio:21/9}
+  .cap{margin-top:10px;font:400 11.5px/1.5 var(--mono);color:var(--muted);letter-spacing:.04em}
+
+  /* ── what is sada: 2×2 ── */
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,3.6vw,56px);margin-top:clamp(34px,4vw,56px)}
+  .pt .kicker{font:500 11.5px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--clay)}
+  .pt p{margin-top:10px;font-size:16.5px}
+  .pt .rule{height:1px;background:var(--line);margin-bottom:16px}
+
+  /* ── how it works ── */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(22px,3vw,44px);margin-top:clamp(34px,4vw,56px)}
+  .steps .ph{aspect-ratio:9/16}
+  .steps .t{margin-top:16px;font:500 11.5px/1 var(--mono);letter-spacing:.12em;color:var(--ink)}
+  .steps p{margin-top:9px;font-size:16px;max-width:30ch}
+
+  /* ── why sada ── */
+  .why{display:grid;grid-template-columns:auto 1fr;gap:clamp(26px,4vw,64px);align-items:start;margin-top:clamp(30px,3.6vw,50px)}
+  .why .glyph{font-family:var(--arabic);font-weight:600;font-size:clamp(58px,8vw,116px);line-height:.9;color:var(--ink)}
+
+  /* ── supported ── */
+  .logos{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(18px,2.4vw,34px);margin-top:clamp(28px,3.4vw,46px);max-width:760px}
+  .logos .ph{height:84px}
+
+  /* ── founders ── */
+  .people{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,4vw,64px);margin-top:clamp(30px,3.6vw,52px)}
+  .people .ph{aspect-ratio:4/5;margin-bottom:20px}
+  .people .role{font:500 11.5px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--clay);margin:9px 0 13px}
+  .people p{font-size:16px}
+  .people .li{display:inline-block;margin-top:16px;font:500 13px var(--mono);letter-spacing:.08em;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--ink);padding-bottom:3px}
+
+  /* ── sign up ── */
+  .signup{margin-top:clamp(66px,9vw,120px);padding:clamp(34px,4.6vw,64px) 0 clamp(70px,9vw,120px);border-top:1px solid var(--line)}
+  .signup h2{max-width:14ch}
+  .form{margin-top:26px;max-width:520px}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .f{margin-top:12px}
+  .f label{display:block;font:500 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:7px}
+  .f input{width:100%;font:400 16px var(--sans);padding:13px 14px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:6px}
+  .f input::placeholder{color:#9AA69D}
+  .form .btn{margin-top:16px}
+  .small{margin-top:14px;font-size:12.5px;color:var(--muted);max-width:52ch;line-height:1.55}
+
+  /* ── foot ── */
+  footer{border-top:1px solid var(--line);padding:30px 0 60px}
+  .frow{display:flex;justify-content:space-between;gap:22px;flex-wrap:wrap;font:400 12.5px/1.6 var(--mono);color:var(--muted);letter-spacing:.03em}
+  .frow a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line)}
+  .frow .links{display:flex;gap:18px;flex-wrap:wrap}
+
+  /* ── annotation flags: what's placeholder vs real ── */
+  .flag{position:absolute;right:0;top:clamp(64px,9vw,132px);font:500 10.5px/1 var(--mono);letter-spacing:.1em;
+        text-transform:uppercase;color:var(--clay);border:1px solid #C0774F55;border-radius:3px;padding:5px 8px}
+
+  @media (max-width:880px){
+    .two,.people,.steps,.logos,.row,.why{grid-template-columns:1fr}
+    .route{display:none}
+    .stop::before{display:none}
+    .lede{margin-left:0}
+    .flag{position:static;display:inline-block;margin-bottom:14px}
+    .hero .shot{aspect-ratio:4/3}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<div class="mast">
+  <img class="logo" src="img/brand/logo.svg" alt="Sada">
+  <button class="menu">Menu</button>
+</div>
+
+<div class="page">
+  <div class="route" aria-hidden="true"></div>
+
+  <!-- ── hero ── -->
+  <section class="stop start hero">
+    <div class="lede">
+      <div class="label"><span class="n">Start</span><span>Muscat · Oman</span></div>
+      <h1>Hear<br>the place</h1>
+      <p class="sub">Audio exploration</p>
+      <div class="cta">
+        <a class="btn" href="#join">Join the waitlist</a>
+        <a class="btn ghost" href="#what">What is Sada</a>
+      </div>
+      <div class="ph shot">PHOTOGRAPH — FULL WIDTH<small>Adam Al Ghafry · Nizwa goat market · faces uncropped</small></div>
+      <p class="cap">Friday morning, the goat market at Nizwa.</p>
+    </div>
+  </section>
+
+  <!-- ── what is sada ── -->
+  <section class="stop" id="what">
+    <span class="flag">Copy final</span>
+    <div class="lede">
+      <div class="label"><span class="n">01</span><span>What is Sada</span></div>
+      <h2>Four things<br>worth knowing</h2>
+      <div class="two">
+        <div class="pt">
+          <div class="rule"></div>
+          <div class="kicker">Audio first</div>
+          <p>An audio-first storytelling app. Listen to voices linked to the exact place where you stand. Stories you won't find in guide books.</p>
+        </div>
+        <div class="pt">
+          <div class="rule"></div>
+          <div class="kicker">Two formats</div>
+          <p>Take a walking tour and learn about your surroundings. Or go on a quest and follow clues to get a prize.</p>
+        </div>
+        <div class="pt">
+          <div class="rule"></div>
+          <div class="kicker">One leads to another</div>
+          <p>One listening point leads to another. Before you know it you've explored where you are and learned something new along the way.</p>
+        </div>
+        <div class="pt">
+          <div class="rule"></div>
+          <div class="kicker">Real voices</div>
+          <p>Historians, artists, wellbeing practitioners and people whose roots go back many generations in this exact place.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── how it works ── -->
+  <section class="stop" id="how">
+    <span class="flag">Screens → design window</span>
+    <div class="lede">
+      <div class="label"><span class="n">02</span><span>How it works</span></div>
+      <h2>Three steps</h2>
+      <div class="steps">
+        <div>
+          <div class="ph">APP SCREEN<small>Explore</small></div>
+          <div class="t">01</div>
+          <p>Download the app and switch on your location.</p>
+        </div>
+        <div>
+          <div class="ph">APP SCREEN<small>Map</small></div>
+          <div class="t">02</div>
+          <p>Explore what's near you, and make your way to the starting point. The voice plays automatically.</p>
+        </div>
+        <div>
+          <div class="ph">APP SCREEN<small>Tour playing</small></div>
+          <div class="t">03</div>
+          <p>Follow the voice, explore the place, learn something new along the way.</p>
+        </div>
+      </div>
+      <p class="cap" style="margin-top:26px">Download line goes here — the app is live on the App Store, so this is not "coming soon".</p>
+    </div>
+  </section>
+
+  <!-- ── why sada ── -->
+  <section class="stop" id="why">
+    <span class="flag">Copy — draft</span>
+    <div class="lede">
+      <div class="label"><span class="n">03</span><span>Why Sada</span></div>
+      <div class="why">
+        <div class="glyph">صدى</div>
+        <div>
+          <h2>Sada means echo</h2>
+          <p class="lead">Short paragraph on why the name is the idea: a place gives something back when you stand in it.</p>
+          <p>Roshni's words to replace this. Two or three sentences at most — it sits between the mechanics above and the people below, so it is the one place on the page that says why any of this exists.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── supported by ── -->
+  <section class="stop">
+    <span class="flag">Logos + permission</span>
+    <div class="lede">
+      <div class="label"><span class="n">04</span><span>Supported by</span></div>
+      <div class="logos">
+        <div class="ph">OMRAN<small>permission needed</small></div>
+        <div class="ph">AL JABER<small>grant funder</small></div>
+        <div class="ph">FUTURE FUND<small>confirm</small></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── founders ── -->
+  <section class="stop" id="founders">
+    <span class="flag">Headshots + LinkedIn</span>
+    <div class="lede">
+      <div class="label"><span class="n">05</span><span>The founders</span></div>
+      <h2>Meet the founders</h2>
+      <p class="lead" style="margin-top:14px">Jasim Al Lawati and Roshni Goyate, Sada's co-founders and husband-wife duo. Over 40 years between them in storytelling — TV, film, tech, marketing and poetry.</p>
+      <div class="people">
+        <div>
+          <div class="ph">HEADSHOT<small>Jasim</small></div>
+          <h3>Jasim Al Lawati</h3>
+          <div class="role">Co-founder · CEO</div>
+          <p>Sound recordist, drone operator and producer, with credits on globally acclaimed wildlife documentaries. Rather than broadcasting stories about Oman to screens, he wants to bring people to the places the stories came from.</p>
+          <a class="li" href="#">LinkedIn</a>
+        </div>
+        <div>
+          <div class="ph">HEADSHOT<small>Roshni</small></div>
+          <h3>Roshni Goyate</h3>
+          <div class="role">Co-founder · CMO</div>
+          <p>Visiting Oman since 2016 and living here since 2021, when she fell for the hiking, camping and snorkelling. Nearly two decades in tech, branding and advertising, and ran her own startup in London.</p>
+          <a class="li" href="#">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── join ── -->
+  <section class="stop end signup" id="join">
+    <div class="lede">
+      <div class="label"><span class="n">End</span><span>Join</span></div>
+      <h2>Be the first to know when we launch</h2>
+      <div class="form">
+        <div class="row">
+          <div class="f"><label for="fn">First name</label><input id="fn" placeholder="Jasim"></div>
+          <div class="f"><label for="ln">Last name</label><input id="ln" placeholder="Al Lawati"></div>
+        </div>
+        <div class="f"><label for="em">Email address</label><input id="em" type="email" placeholder="you@example.com"></div>
+        <button class="btn">Sign me up</button>
+        <p class="small">By clicking the button you consent to us emailing you with updates from Sada. No spam, we promise. Unsubscribe anytime.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="frow">
+      <div>Hakawati LLC · Muscat · Photographs by Adam Al Ghafry</div>
+      <div class="links">
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="support.html">Support</a>
+        <a href="https://instagram.com/sada_explore">sada_explore</a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+</body>
+</html>

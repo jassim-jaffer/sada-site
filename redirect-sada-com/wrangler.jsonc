@@ -1,0 +1,10 @@
+{
+  "name": "sada-com-redirect",
+  "main": "index.js",
+  "compatibility_date": "2026-09-01",
+  "workers_dev": false,
+  "routes": [
+    { "pattern": "xn--sda-1oa.com/*", "zone_name": "xn--sda-1oa.com" },
+    { "pattern": "www.xn--sda-1oa.com/*", "zone_name": "xn--sda-1oa.com" }
+  ]
+}

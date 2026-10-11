@@ -3,325 +3,403 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>sāda — see the place, hear the story</title>
-<meta name="description" content="Audio exploration in Oman. Guided walks, treasure hunts and point maps, told in the voices of the people who know a place best.">
-<meta property="og:title" content="sāda — see the place, hear the story">
-<meta property="og:description" content="Audio exploration in Oman. Guided walks, treasure hunts and point maps, in real voices.">
-<meta property="og:image" content="img/drum.jpg">
-<meta name="theme-color" content="#F5F3EE">
+<title>Sada — Hear the place</title>
+<meta name="description" content="Audio exploration. Voices linked to the exact place where you stand. Tours, mindfulness walks and quests across Oman.">
+<meta property="og:title" content="Sada — Hear the place">
+<meta property="og:description" content="Audio exploration. Voices linked to the exact place where you stand.">
+<meta property="og:image" content="img/doors/nasra-760.jpg">
+<meta name="theme-color" content="#0F1A14">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800&family=IBM+Plex+Sans+Arabic:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@600;700&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --ink:#0F1A14; --paper:#F5F3EE; --tint:#EDEAE2; --lime:#C8E632;
-    --dim:#0F1A14A8; --mute:#0F1A146E; --rule:#0F1A1418;
-    --gut:clamp(20px,4.6vw,56px); --max:1280px;
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  html{-webkit-text-size-adjust:100%}
-  body{background:var(--paper);color:var(--ink);font:400 17px/1.55 Archivo,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  :root{--ink:#0F1A14;--paper:#F5F3EE;--lime:#C8E632;--clay:#C0774F;
+        --line:#4B564B;--dimp:#B4BDAC;
+        --body:'DM Sans',Arial,sans-serif;--display:'Archivo Black',Arial Black,sans-serif;
+        --mono:'Space Mono',monospace;--ar:'IBM Plex Sans Arabic',sans-serif}
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;scroll-padding-top:20px}
+  body{margin:0;background:var(--ink);color:var(--paper);font:17px/1.55 var(--body);overflow-x:clip;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+  button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid var(--lime);outline-offset:4px}
   img{display:block;max-width:100%}
-  .ar{font-family:"IBM Plex Sans Arabic",Archivo,sans-serif;font-weight:700}
-  .wrap{max-width:var(--max);margin:0 auto;padding-inline:var(--gut)}
-  .eyebrow{font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--mute)}
-  :focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+  h1,h2,h3,p{margin:0}
+  h1,h2{letter-spacing:-.065em;line-height:.92}
+  .mono{font:12px/1.4 var(--mono);letter-spacing:.06em;text-transform:uppercase}
+  .wrap{max-width:1560px;margin:0 auto}
 
-  /* ── listening point: the signature ── */
-  .lp{position:absolute;width:clamp(76px,9vw,116px);aspect-ratio:1;transform:translate(-50%,-50%);pointer-events:none;z-index:2}
-  .lp circle{fill:none;stroke:var(--lime);stroke-width:1.7;vector-effect:non-scaling-stroke}
-  .lp .core{fill:var(--lime);stroke:none}
-  .lp .r{transform-origin:50% 50%;opacity:0}
-  @keyframes ping{0%{transform:scale(.26);opacity:0}14%{opacity:1}100%{transform:scale(1);opacity:0}}
-  .lp.live .r{animation:ping 3.8s cubic-bezier(.16,.72,.3,1) infinite}
-  .lp.live .r:nth-of-type(2){animation-delay:1.05s}
-  .lp.live .r:nth-of-type(3){animation-delay:2.1s}
-  @media (prefers-reduced-motion:reduce){.lp.live .r{animation:none;opacity:.5}}
-
-  /* ── masthead ── */
-  .mast{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:22px 0 26px}
-  .lock{display:flex;align-items:center;gap:11px}
-  .lock svg{width:32px;height:32px}
-  .word{font-size:24px;font-weight:800;letter-spacing:-.05em;line-height:1}
-  .word-ar{font-size:19px;line-height:1;color:var(--dim)}
-  .mast .eyebrow{text-align:right}
+  /* ── header: paper bar so the logo keeps its own colours ── */
+  /* the approved horizontal logo, option B (LOGO pack, 4 Oct), colour-for-ink, transparent —
+     sitting straight on the page: no bar, panel, tile or border behind it.
+     Sized so it never drops under the pack's 150px minimum width. */
+  header{display:flex;align-items:center;justify-content:space-between;gap:28px;padding:18px 4%;border-bottom:1px solid var(--line)}
+  header .logo{height:64px;width:auto;display:block}
+  header nav{display:flex;gap:28px;font-size:14px}
+  header nav a:hover{color:var(--lime)}
+  .app-link{background:var(--lime);color:var(--ink);padding:11px 18px;border-radius:8px;font-size:14px;font-weight:600}
+  .app-link:hover{background:#d7f04f}
 
   /* ── hero ── */
-  .hero{padding-top:clamp(14px,2vw,26px)}
-  h1{font-size:clamp(44px,9.4vw,132px);line-height:.9;letter-spacing:-.058em;font-weight:800;text-wrap:balance}
-  h1 em{font-style:normal;color:var(--mute)}
-  .heroline{display:flex;gap:clamp(20px,4vw,56px);align-items:flex-end;justify-content:space-between;flex-wrap:wrap;margin-top:clamp(20px,3vw,34px);padding-bottom:clamp(18px,2.4vw,28px);border-bottom:1px solid var(--rule)}
-  .heroline p{font-size:clamp(16px,1.5vw,19px);color:var(--dim);max-width:46ch}
-  .avail{display:flex;align-items:center;gap:9px;font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;white-space:nowrap;padding-bottom:3px;border-bottom:2px solid var(--lime)}
-  .avail::before{content:"";width:7px;height:7px;background:var(--lime);border-radius:999px;flex:none}
+  .hero{padding:40px 4% 76px;position:relative}
+  .kicker{display:flex;justify-content:space-between;gap:20px;color:var(--dimp)}
+  .live:before{content:'';display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--lime);margin-right:9px}
+  .title{display:flex;justify-content:space-between;gap:46px;align-items:flex-end;margin-top:42px}
+  .title h1{font:clamp(74px,11vw,168px)/.86 var(--display);letter-spacing:-.075em}
+  .title h1 span{color:var(--lime)}
+  .title .side{padding-bottom:12px;max-width:34ch}
+  .title .side p{font-size:20px;color:var(--dimp)}
+  .title .side b{color:var(--paper);font-weight:500;display:block;font-size:22px;margin-bottom:8px}
+  /* the mark draws itself in, the way the app's opener does */
+  .disc{display:inline-grid;place-items:center;width:118px;height:136px;margin-top:28px;background:var(--lime);border-radius:45%;transform:rotate(-6deg)}
+  .draw{width:68px;height:auto;overflow:visible}
+  .draw .route{stroke-dasharray:700;stroke-dashoffset:700;animation:draw 2.2s .3s cubic-bezier(.45,0,.2,1) forwards}
+  @keyframes draw{to{stroke-dashoffset:0}}
+  .draw .dot{transform-box:fill-box;transform-origin:center;transform:scale(0);animation:pop .45s cubic-bezier(.3,1.6,.5,1) forwards}
+  .draw .d2{animation-delay:2.25s}
+  .draw .d1{animation-delay:.3s}
+  @keyframes pop{to{transform:scale(1)}}
 
-  .shot{position:relative;margin-top:clamp(24px,3.4vw,40px)}
-  .shot img{width:100%;aspect-ratio:3/2;object-fit:cover;object-position:50% 50%}
-  .cap{margin-top:10px;font-size:12px;color:var(--mute);letter-spacing:.01em}
+  /* ── the console box (from the first version) carrying the app's three doors ── */
+  .console{display:grid;grid-template-columns:1.65fr 1fr;border:1px solid var(--line);margin-top:48px}
+  .art{position:relative;min-height:540px;overflow:hidden;background:#1a2a20}
+  .art>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.04);transition:opacity .55s,transform 1.2s cubic-bezier(.2,.7,.2,1)}
+  .art>img.on{opacity:1;transform:scale(1)}
+  .shade{position:absolute;inset:0;background:linear-gradient(0deg,#0F1A14EB,#0F1A1400 64%)}
+  .vlabel{position:absolute;top:22px;left:22px;background:var(--ink);padding:8px 12px}
+  .cap{position:absolute;bottom:28px;left:30px;right:24px}
+  .cap h2{font-size:clamp(30px,3.4vw,52px);letter-spacing:-.05em;line-height:1;margin:14px 0 16px;max-width:18ch}
+  .tuner{padding:30px;background:#17271E;display:flex;flex-direction:column}
+  .tuner>.mono{color:var(--dimp)}
+  .tuner .q{font-size:23px;font-weight:600;letter-spacing:-.025em;margin-top:12px}
+  .channels{margin:20px 0}
+  .channels button{display:flex;gap:18px;align-items:center;width:100%;padding:19px 0;border-bottom:1px solid var(--line);text-align:left;font:12px var(--mono);transition:color .2s}
+  .channels button span{font:23px var(--body);flex:1;letter-spacing:-.02em}
+  .channels button:hover{color:var(--lime)}
+  .channels button[aria-pressed=true]{color:var(--lime)}
+  .channels button[aria-pressed=true]:before{content:'';width:8px;height:8px;background:var(--lime);border-radius:50%}
+  .blurb{font-size:16.5px;color:#C1CABE;min-height:78px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+  .go{display:flex;justify-content:space-between;background:var(--lime);color:var(--ink);padding:15px 20px;font-weight:600;margin-top:auto;border-radius:8px}
+  .go:hover{background:#d7f04f}
+  .badge{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:6px 13px 6px 7px;font:11.5px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase}
+  .badge i{width:22px;height:22px;border-radius:50%;background:var(--paper);display:grid;place-items:center}
+  .badge i img{width:15px;height:15px}
+  .b-tour{background:var(--lime);color:var(--ink)}
+  .b-walk{background:var(--clay);color:var(--paper)}
+  .b-quest{background:var(--ink);color:var(--paper);box-shadow:inset 0 0 0 1px #ffffff40}
+  .chip{display:inline-block;background:var(--paper);color:var(--ink);border-radius:999px;padding:6px 12px;font:12px/1 var(--body);font-weight:500}
 
-  /* ── ticker ── */
-  .ticker{margin-top:clamp(44px,6vw,78px);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:15px 0;overflow:hidden;white-space:nowrap}
-  .ticker-in{display:inline-flex;gap:0;animation:slide 46s linear infinite;will-change:transform}
-  .ticker span{font-size:13px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;padding-inline:22px;color:var(--dim)}
-  .ticker span::after{content:"·";margin-inline-start:22px;color:var(--lime)}
-  @keyframes slide{to{transform:translateX(-50%)}}
-  @media (prefers-reduced-motion:reduce){.ticker-in{animation:none}}
+  /* ── how ── */
+  .how{padding:80px 4%;border-top:1px solid var(--line)}
+  .howline{display:flex;justify-content:space-between;gap:20px;font:clamp(26px,5vw,78px)/1 var(--display);letter-spacing:-.07em;margin:32px 0 52px;flex-wrap:wrap}
+  .howline span.lime{color:var(--lime)}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:7%}
+  .steps b{display:block;font:34px Georgia,serif;color:var(--clay);margin-bottom:12px}
+  .steps h3{font-size:23px;letter-spacing:-.03em;margin-bottom:10px;font-weight:600}
+  .steps p{color:var(--dimp);font-size:16px}
 
-  /* ── offerings ── */
-  .offer{padding-top:clamp(58px,8vw,110px)}
-  .row{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4.4vw,72px);align-items:center;padding:clamp(34px,5vw,72px) 0;border-bottom:1px solid var(--rule)}
-  .row.flip .fig{order:2}
-  .fig{position:relative}
-  .fig img{width:100%;aspect-ratio:4/3;object-fit:cover}
-  .row h2{font-size:clamp(28px,4.2vw,52px);line-height:1;letter-spacing:-.05em;font-weight:800;margin-top:10px}
-  .row p{margin-top:14px;color:var(--dim);font-size:clamp(15px,1.5vw,18px);max-width:36ch}
+  /* ── what is sada ── */
+  .what{padding:86px 4%;border-top:1px solid var(--line)}
+  .what h2{font:clamp(40px,5.6vw,88px)/.94 var(--display);letter-spacing:-.06em;margin:24px 0 50px}
+  .what h2 em{font-style:normal;color:var(--lime)}
+  .pts{display:grid;grid-template-columns:1fr 1fr;gap:48px 8%}
+  .pt .num{font:13px var(--mono);color:var(--clay);display:block;margin-bottom:12px}
+  .pt b{display:block;font-size:21px;font-weight:700;letter-spacing:-.02em;margin-bottom:9px}
+  .pt p{color:var(--dimp);max-width:46ch}
+  .pt i{font-style:italic;color:var(--paper)}
 
-  /* ── how (pins & audio) ── */
-  .how{display:grid;grid-template-columns:auto 1fr;gap:clamp(28px,5vw,80px);align-items:center;padding:clamp(52px,7vw,104px) 0;border-bottom:1px solid var(--rule)}
-  .how-mark{width:clamp(140px,19vw,246px);flex:none}
-  .how-mark svg{width:100%;height:auto}
-  .how h2{font-size:clamp(26px,3.8vw,46px);line-height:1.02;letter-spacing:-.048em;font-weight:800;margin-top:10px}
-  .how p{margin-top:14px;color:var(--dim);font-size:clamp(15px,1.5vw,18px);max-width:46ch}
+  /* ── why — paper ── */
+  .why{background:var(--paper);color:var(--ink);padding:92px 4%}
+  .why .in{display:grid;grid-template-columns:auto 1fr;gap:7%;align-items:center;max-width:1180px}
+  .why .glyph{font-family:var(--ar);font-weight:700;font-size:clamp(84px,12vw,186px);line-height:.85;color:var(--clay)}
+  .why h2{font:clamp(40px,5.4vw,82px)/.94 var(--display);letter-spacing:-.06em}
+  .why p{margin-top:20px;font-size:clamp(17px,1.9vw,21px);max-width:46ch;color:#4A564C}
 
-  /* ── voices ── */
-  .voices{padding:clamp(58px,8vw,116px) 0;display:grid;grid-template-columns:1.3fr 1fr;gap:clamp(26px,4.4vw,72px);align-items:end}
-  .voices h2{font-size:clamp(32px,5.6vw,72px);line-height:.96;letter-spacing:-.055em;font-weight:800}
-  .voices h2 mark{background:none;color:var(--ink);box-shadow:inset 0 -.34em 0 var(--lime)}
-  .voices p{color:var(--dim);font-size:clamp(15px,1.5vw,18px);max-width:38ch}
-  .voices p+p{margin-top:12px}
+  /* ── founders — paper ── */
+  .people{background:var(--paper);color:var(--ink);padding:0 4% 94px}
+  .people h2{font:clamp(38px,5vw,76px)/.94 var(--display);letter-spacing:-.06em;margin-bottom:20px}
+  .people .intro{max-width:56ch;color:#4A564C;font-size:18px}
+  .pair{display:grid;grid-template-columns:1fr 1fr;gap:6%;margin-top:46px}
+  .who .mono{color:var(--clay)}
+  .who h3{font-size:27px;letter-spacing:-.03em;margin:8px 0 4px;font-weight:700}
+  .who p{color:#4A564C;font-size:16px;margin-top:11px}
 
-  /* ── signup ── */
-  .signup{background:var(--tint);padding:clamp(34px,5vw,64px);display:grid;grid-template-columns:1fr auto;gap:clamp(20px,3vw,48px);align-items:center}
-  .signup h3{font-size:clamp(24px,3.2vw,40px);line-height:1.02;letter-spacing:-.045em;font-weight:800}
-  .signup p{color:var(--dim);margin-top:9px;font-size:15px;max-width:40ch}
-  form{display:flex;gap:9px;flex-wrap:wrap}
-  input[type=email]{font:400 16px Archivo,sans-serif;padding:14px 17px;min-width:246px;border:1px solid var(--rule);background:var(--paper);color:var(--ink);border-radius:0}
-  input[type=email]::placeholder{color:var(--mute)}
-  button{font:600 15px Archivo,sans-serif;padding:14px 24px;border:0;background:var(--ink);color:var(--paper);cursor:pointer;border-radius:0;transition:background .16s}
-  button:hover{background:#1c2b23}
-  .note{font-size:12px;color:var(--mute);margin-top:10px}
-  .tally{margin-top:16px;font-size:15px;color:var(--dim)}
-  .tally b{font-weight:800;font-size:19px;color:var(--ink);box-shadow:inset 0 -.32em 0 var(--lime);padding:0 2px}
+  /* ── join — lime ── */
+  .join{background:var(--lime);color:var(--ink);padding:76px 4%}
+  .join h2{font:clamp(46px,7vw,112px)/.9 var(--display);letter-spacing:-.07em;max-width:14ch}
+  .join .in{display:grid;grid-template-columns:1.5fr 1fr;gap:9%;align-items:end;margin-top:32px}
+  .join p{font-size:21px;max-width:34ch}
+  .join .cta{background:var(--ink);color:var(--lime);padding:18px 28px;border-radius:8px;font-weight:600;font-size:17px;margin-top:22px;display:inline-block}
 
-  /* ── footer ── */
-  footer{padding:clamp(40px,5vw,70px) 0 clamp(48px,6vw,80px);border-top:1px solid var(--rule);margin-top:clamp(44px,6vw,84px)}
-  .frow{display:flex;justify-content:space-between;gap:26px;flex-wrap:wrap;align-items:flex-end}
-  .small{font-size:12.5px;color:var(--mute);margin-top:12px;line-height:1.5}
-  .flinks{display:flex;gap:22px;flex-wrap:wrap;font-size:15px}
-  footer a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--rule);padding-bottom:3px;transition:border-color .16s}
-  footer a:hover{border-color:var(--lime)}
+  footer{padding:50px 4%;display:flex;gap:30px;flex-wrap:wrap;align-items:center;font-size:14px;color:var(--dimp)}
+  footer .links{display:flex;gap:22px;flex-wrap:wrap;margin-left:auto}
+  footer a:hover{color:var(--lime)}
 
-  @media (max-width:840px){
-    .row,.voices,.signup,.how{grid-template-columns:1fr}
-    .how-mark{width:120px}
-    .row.flip .fig{order:0}
-    .signup{gap:22px}
-    .shot img{aspect-ratio:4/3}
+  dialog{border:0;background:var(--paper);color:var(--ink);padding:0;max-width:470px;width:calc(100% - 32px);box-shadow:0 25px 90px #0008;border-radius:14px}
+  dialog::backdrop{background:#0F1A14CC;backdrop-filter:blur(6px)}
+  .sheet{padding:34px;position:relative}
+  .sheet h2{font:29px/1.05 var(--display);letter-spacing:-.045em;max-width:16ch}
+  .sheet .x{position:absolute;right:10px;top:10px;width:40px;height:40px;font-size:26px;border-radius:50%}
+  .f{margin-top:14px}
+  .f label{display:block;font:11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:#6B766D;margin-bottom:6px}
+  .f input{width:100%;font:16px var(--body);padding:13px 14px;border:1px solid #0F1A1426;background:#fff;color:var(--ink);border-radius:8px}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+  .submit{width:100%;background:var(--ink);color:var(--paper);padding:15px;border-radius:8px;font-weight:600;margin-top:18px;font-size:16px}
+  .small{font-size:12.5px;color:#6B766D;margin-top:14px;line-height:1.5}
+  .msg{font:14px var(--body);margin-top:11px;font-weight:600;color:var(--clay)}
+
+  @media(max-width:980px){
+    header nav{display:none}
+    .title{display:block}
+    .title .side{margin-top:26px;padding:0}
+    .steps,.pts,.pair,.why .in,.join .in{grid-template-columns:1fr}
+    .console{display:block}
+    .art{min-height:400px}
+    .why .in{gap:22px}
+    .howline{display:block}
+    .howline span{display:block}
+    .steps>div{margin-top:28px}
+  }
+  @media(prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *,*:before,*:after{animation:none!important;transition:none!important}
+    .art>img{transform:none}
+    .draw .route{stroke-dashoffset:0}
+    .draw .dot{transform:scale(1)}
   }
 </style>
 </head>
 <body>
-
 <div class="wrap">
-  <div class="mast">
-    <div class="lock">
-      <svg viewBox="0 0 84 78" aria-hidden="true">
-        <g fill="none" stroke="#0F1A14" stroke-width="2.2">
-          <circle cx="40" cy="38" r="30"/><circle cx="40.9" cy="37.2" r="26"/><circle cx="41.8" cy="36.3" r="22"/>
-          <circle cx="42.6" cy="35.2" r="17"/><circle cx="43.3" cy="34.2" r="13"/>
-        </g>
-        <circle cx="44.3" cy="35.2" r="8.6" fill="#C8E632"/><circle cx="41" cy="39" r="2.2" fill="#0F1A14"/>
-      </svg>
-      <span class="word">sāda</span>
-      <span class="word-ar ar">صدى</span>
-    </div>
-    <span class="eyebrow">Audio exploration · Oman</span>
+
+<header>
+  <img class="logo" src="img/brand/sada-horizontal-B-colour-for-ink.svg" alt="Sada" width="151" height="64">
+  <nav>
+    <a href="#doors">Experiences</a>
+    <a href="#how">How it works</a>
+    <a href="#what">What is Sada</a>
+    <a href="#why">Why Sada</a>
+  </nav>
+  <button class="app-link" data-open>Join the waitlist</button>
+</header>
+
+<!-- ── hero ── -->
+<section class="hero">
+  <div class="kicker mono">
+    <span class="live">Oman · on the App Store</span>
+    <span>Sada — audio exploration</span>
   </div>
-
-  <header class="hero">
-    <h1>See the place,<br><em>hear the story.</em></h1>
-    <div class="heroline">
-      <p>Guided walks, treasure hunts and point maps — told by the people who know a place best, and playing as you arrive.</p>
-      <span class="avail">Coming to iOS &amp; Android</span>
-    </div>
-
-    <figure class="shot">
-      <img src="img/market.jpg" alt="Men seated together at the goat market in Nizwa, a young goat standing in front of them">
-      <svg class="lp live" style="left:56%;top:33%" viewBox="0 0 100 100" aria-hidden="true">
-        <circle class="r" cx="50" cy="50" r="46"/><circle class="r" cx="50" cy="50" r="46"/><circle class="r" cx="50" cy="50" r="46"/>
-        <circle class="core" cx="50" cy="50" r="4.2"/>
-      </svg>
-      <figcaption class="cap">Friday morning, the goat market at Nizwa. Every one of them has the story.</figcaption>
-    </figure>
-  </header>
-</div>
-
-<div class="ticker" aria-hidden="true">
-  <div class="ticker-in">
-    <span>Muttrah</span><span>Nizwa</span><span>Old Muscat</span><span>Misfat al Abriyeen</span><span>Sur</span><span>Jebel Akhdar</span><span>Bahla</span><span>Al Hamra</span><span>Wahiba</span><span>Salalah</span>
-    <span>Muttrah</span><span>Nizwa</span><span>Old Muscat</span><span>Misfat al Abriyeen</span><span>Sur</span><span>Jebel Akhdar</span><span>Bahla</span><span>Al Hamra</span><span>Wahiba</span><span>Salalah</span>
-  </div>
-</div>
-
-<main class="wrap offer">
-  <span class="eyebrow">What you can do with it</span>
-
-  <section class="row">
-    <div class="fig">
-      <img src="img/drum.jpg" alt="A drummer at a fort in Oman holding a rope-tensioned drum, men in blue dishdashas beside him">
-      <svg class="lp" style="left:41%;top:58%" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="34"/><circle cx="50" cy="50" r="18"/><circle class="core" cx="50" cy="50" r="4.2"/></svg>
-    </div>
-    <div>
-      <span class="eyebrow">Guided walks</span>
-      <h2>Walk it.<br>It tells you.</h2>
-      <p>Follow a route at your own pace. The audio begins as you reach each stop — your phone stays in your pocket, your eyes stay on the place.</p>
-    </div>
-  </section>
-
-  <section class="row flip">
-    <div class="fig">
-      <img src="img/camel.jpg" alt="A boy standing beside a camel at an Omani livestock market">
-      <svg class="lp" style="left:63%;top:44%" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="34"/><circle cx="50" cy="50" r="18"/><circle class="core" cx="50" cy="50" r="4.2"/></svg>
-    </div>
-    <div>
-      <span class="eyebrow">Treasure hunts</span>
-      <h2>Follow<br>the sound.</h2>
-      <p>A trail of places to find, one clue at a time. No blue dot to follow — the sound gets warmer as you get closer.</p>
-    </div>
-  </section>
-
-  <section class="row">
-    <div class="fig">
-      <img src="img/camels.jpg" alt="Handlers leading decorated camels at a camel market in Oman">
-      <svg class="lp" style="left:72%;top:47%" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="34"/><circle cx="50" cy="50" r="18"/><circle class="core" cx="50" cy="50" r="4.2"/></svg>
-    </div>
-    <div>
-      <span class="eyebrow">Point maps</span>
-      <h2>Wander.<br>Listen where you stand.</h2>
-      <p>Maps built by your favourite creators, each around a theme — a scatter of pins with no set order. Open one, follow whatever catches you, and hear what happened right there.</p>
-    </div>
-  </section>
-
-  <section class="how">
-    <div class="how-mark">
-      <svg viewBox="0 0 100 100" aria-hidden="true">
-        <g fill="none" stroke="#0F1A14" stroke-width="1.7">
-          <circle cx="48" cy="50" r="42"/><circle cx="49.1" cy="49" r="36"/><circle cx="50.2" cy="47.9" r="30"/>
-          <circle cx="51.2" cy="46.6" r="23"/><circle cx="52" cy="45.4" r="17"/>
-        </g>
-        <circle cx="52" cy="45.4" r="11.6" fill="#C8E632"/>
-        <circle cx="48" cy="50" r="3" fill="#0F1A14"/>
-      </svg>
-    </div>
-    <div>
-      <span class="eyebrow">Pins &amp; audio</span>
-      <h2>A pin is a place<br>with something to hear.</h2>
-      <p>Every pin on the map marks a spot where a voice was left — a story, a memory, a walk that starts here. Tap it and it plays exactly where it happened — no ceremony, no staring at a screen.</p>
-      <p>The closer you stand, the more the place has to say.</p>
-    </div>
-  </section>
-
-  <section class="voices">
-    <h2>Real voices,<br><mark>in real places.</mark></h2>
-    <div>
-      <p>Every walk, hunt and map on sāda is told by people — guides, historians, fishermen, neighbours — not by a machine reading a script.</p>
-      <p>And you can leave a voice of your own at a place — a memory, a moment, a story told where it happened. We call that an <b>echo</b>. It's what sāda means — <span class="ar">صدى</span>, the echo — and every one left keeps a place speaking for the next person who stands there.</p>
-    </div>
-  </section>
-
-  <section class="signup">
-    <div>
-      <h3>Join the waitlist.</h3>
-      <p>Sign up for updates and launch details — we'll only write when there's something worth hearing.</p>
-      <p class="tally" id="tally" hidden><b id="tallyN">—</b> people are already waiting.</p>
-    </div>
-    <div>
-      <form id="signup" novalidate>
-        <input type="email" id="email" name="email" placeholder="your@email.com" aria-label="Email address" required autocomplete="email">
-        <button type="submit" id="go">Join the waitlist</button>
-      </form>
-      <p class="note" id="note">No spam, no sharing your address — just the occasional update that matters.</p>
-    </div>
-  </section>
-</main>
-
-<footer class="wrap">
-  <div class="frow">
-    <div>
-      <div class="lock">
-        <svg viewBox="0 0 84 78" style="width:26px;height:26px" aria-hidden="true">
-          <g fill="none" stroke="#0F1A14" stroke-width="2.4">
-            <circle cx="40" cy="38" r="30"/><circle cx="41.8" cy="36.3" r="22"/><circle cx="43.3" cy="34.2" r="13"/>
-          </g>
-          <circle cx="44.3" cy="35.2" r="8.6" fill="#C8E632"/>
+  <div class="title">
+    <h1>Hear<br>the <span>place</span></h1>
+    <div class="side">
+      <b>Audio exploration.</b>
+      <p>Voices linked to the exact place where you stand — told by the people who know it best.</p>
+      <!-- the real Route pin (Brand 4 sada-pin), on a lime disc so its ink line reads;
+           the route draws itself in, then the two endpoints land — as the app's opener does -->
+      <span class="disc">
+        <svg class="draw" viewBox="0 0 128 156" aria-hidden="true">
+          <path class="route" d="M99 32 C84 10 56 10 36 24 C9 43 9 72 29 96 L64 143 L95 101 C107 84 110 71 103 56 C94 38 76 30 60 37 C43 44 37 59 42 74 C47 89 62 96 77 89 C91 82 94 65 84 56 C78 50 68 48 60 52" fill="none" stroke="#0F1A14" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle class="dot d1" cx="99" cy="32" r="6.5" fill="#C8E632" stroke="#0F1A14" stroke-width="1.5"/>
+          <circle class="dot d2" cx="60" cy="52" r="6.5" fill="#C0774F" stroke="#0F1A14" stroke-width="1.5"/>
         </svg>
-        <span class="word" style="font-size:18px">sāda</span>
-        <span class="word-ar ar" style="font-size:15px">صدى</span>
+      </span>
+    </div>
+  </div>
+
+  <!-- the console: the first version's box, now carrying the app's real three doors -->
+  <div class="console" id="doors">
+    <div class="art">
+      <img id="ph-tour"  class="on" src="img/doors/nasra-760.jpg"           alt="The Royal Opera House, Muscat">
+      <img id="ph-walk"  src="img/doors/mindful-muttrah-760.jpg"            alt="The Muttrah corniche, Muscat">
+      <img id="ph-quest" src="img/doors/mirani-760.jpg"                     alt="Mirani Fort, Muscat">
+      <div class="shade"></div>
+      <span class="vlabel mono">Follow a voice / find a place</span>
+      <div class="cap">
+        <span class="badge b-tour" id="cap-badge"><i><img id="cap-icon" src="img/brand/type-tour.svg" alt=""></i><span id="cap-k">A tour</span></span>
+        <h2 id="cap-t">W Hotel to The Royal Opera House</h2>
+        <span class="chip" id="cap-chip">Nasra Al Manji</span>
       </div>
-      <p class="small">By Hakawati LLC · Muscat, Sultanate of Oman<br>Photographs by Adam Al Ghafry.</p>
     </div>
-    <div class="flinks">
-      <a href="privacy.html">Privacy</a>
-      <a href="support.html">Support</a>
-      <a href="mailto:jassim@dauboman.com">Contact</a>
+
+    <div class="tuner">
+      <span class="mono">Choose your experience</span>
+      <p class="q">What do you want to do today?</p>
+      <div class="channels" role="group" aria-label="Choose an experience">
+        <button data-ch="tour"  aria-pressed="true">01 <span>A tour</span> &rsaquo;</button>
+        <button data-ch="walk"  aria-pressed="false">02 <span>Mindfulness walk</span> &rsaquo;</button>
+        <button data-ch="quest" aria-pressed="false">03 <span>A quest</span> &rsaquo;</button>
+      </div>
+      <p class="blurb" id="blurb">Follow a route of stories.</p>
+      <a class="go" href="https://sada.tours" target="_blank" rel="noopener">Open in Sada <span>&nearr;</span></a>
     </div>
+  </div>
+</section>
+
+<!-- ── how it works ── -->
+<section class="how" id="how">
+  <span class="mono" style="color:var(--dimp)">How it works</span>
+  <div class="howline"><span>CHOOSE.</span><span>STEP OUT.</span><span class="lime">TUNE IN.</span></div>
+  <div class="steps">
+    <div><b>01</b><h3>Find your experience</h3><p>Download the app and switch on your location.</p></div>
+    <div><b>02</b><h3>Meet it in the real world</h3><p>Explore what's near you, and make your way to the starting point. The voice plays automatically.</p></div>
+    <div><b>03</b><h3>Follow the voice</h3><p>Follow the voice, explore the place, learn something new along the way.</p></div>
+  </div>
+</section>
+
+<!-- ── what is sada ── -->
+<section class="what" id="what">
+  <span class="mono" style="color:var(--dimp)">What is Sada</span>
+  <h2>Stories you won't<br>find in <em>guide books</em></h2>
+  <div class="pts">
+    <div class="pt"><span class="num">01</span><b>An audio-first storytelling app</b><p>Listen to voices linked to the exact place where you stand. Stories you won't find in guide books.</p></div>
+    <div class="pt"><span class="num">02</span><b>Two formats to choose from</b><p>Take a <i>walking tour</i> and learn about your surroundings. Or go on a <i>quest</i> and follow clues to get a prize.</p></div>
+    <div class="pt"><span class="num">03</span><b>One listening point leads to another</b><p>Before you know it you've explored where you are and learned something — many things! — new along the way.</p></div>
+    <div class="pt"><span class="num">04</span><b>Voiced by real people</b><p>Historians, artists, wellbeing practitioners and people whose roots go back many generations in this exact place.</p></div>
+  </div>
+</section>
+
+<!-- ── why sada ── -->
+<section class="why" id="why">
+  <div class="in">
+    <div class="glyph">صدى</div>
+    <div>
+      <span class="mono" style="color:var(--clay)">Why Sada</span>
+      <h2>Sada means echo</h2>
+      <p>A place gives something back when you stand in it. That is what the app is for, and what the name means.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── founders ── -->
+<section class="people" id="people">
+  <span class="mono" style="color:var(--clay)">The founders</span>
+  <h2>Meet the founders</h2>
+  <p class="intro">Say hello to Jasim Al Lawati and Roshni Goyate, Sada's co-founders, and husband-wife duo. Together they bring over 40 years' experience in storytelling, through TV, film, tech, marketing, poetry and more.</p>
+  <div class="pair">
+    <div class="who">
+      <span class="mono">Co-founder · CEO</span>
+      <h3>Jasim Al Lawati</h3>
+      <p>Jasim has traveled the world as a sound recordist, drone operator and producer, capturing some of the most remote wildlife and contributing to globally acclaimed documentaries.</p>
+      <p>As Sada's CEO, rather than broadcasting stories to screens about his homeland of Oman, he wants to use tech to bring people to the exact locations in Oman where the stories come from.</p>
+    </div>
+    <div class="who">
+      <span class="mono">Co-founder · CMO</span>
+      <h3>Roshni Goyate</h3>
+      <p>Roshni has been visiting Oman since 2016 and eventually moved here in 2021, which is when she fell head over heels with the hiking, camping and snorkelling opportunities in the Sultanate.</p>
+      <p>As our CMO, she brings nearly two decades of experience in tech, branding and advertising as well as having run her own successful startup in London.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── join ── -->
+<section class="join">
+  <span class="mono">Join</span>
+  <div class="in">
+    <h2>Be the first to know what's next</h2>
+    <div>
+      <p>Sada is on the App Store now, with Android on the way. Join the list and we'll tell you when there's something worth hearing.</p>
+      <button class="cta" data-open>Join the waitlist &rarr;</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>Hakawati LLC · Muscat, Sultanate of Oman<br>Photographs by Adam Al Ghafry</div>
+  <div class="links">
+    <a href="privacy.html">Privacy</a>
+    <a href="terms.html">Terms</a>
+    <a href="support.html">Support</a>
+    <a href="delete-account.html">Delete account</a>
+    <a href="https://instagram.com/sada_explore" target="_blank" rel="noopener">sada_explore</a>
+    <a href="mailto:jas@sada.com.om">Contact</a>
   </div>
 </footer>
+</div>
+
+<dialog id="dlg">
+  <div class="sheet">
+    <button class="x" id="x" aria-label="Close">&times;</button>
+    <h2>Be the first to know when we launch 🚀</h2>
+    <form id="wl" novalidate>
+      <div class="two">
+        <div class="f"><label for="fn">First name</label><input id="fn" autocomplete="given-name" required></div>
+        <div class="f"><label for="ln">Last name</label><input id="ln" autocomplete="family-name" required></div>
+      </div>
+      <div class="f"><label for="em">Email address</label><input id="em" type="email" autocomplete="email" required placeholder="you@example.com"></div>
+      <button class="submit" type="submit" id="go">Sign me up</button>
+    </form>
+    <p class="msg" id="msg"></p>
+    <p class="small">By clicking the button you consent to us emailing you with updates from Sada. No spam, we promise. Unsubscribe anytime.</p>
+  </div>
+</dialog>
 
 <script>
-// Live waitlist tally. Reads a count-only function — never rows, never emails.
-// Requires public.waitlist_count() with execute granted to anon (see STORE SUBMISSION notes).
-(function () {
-  var URL  = 'https://imbppnlkomsugmmzfynb.supabase.co';
-  var ANON = 'sb_publishable_ZnV2CrnmwppnVmOGzkql4w__BJrqnI4';
-  var MIN  = 25;                                       // don't publish a number that undersells
+(function(){
+  var URL='https://imbppnlkomsugmmzfynb.supabase.co',
+      ANON='sb_publishable_ZnV2CrnmwppnVmOGzkql4w__BJrqnI4';
 
-  fetch(URL + '/rest/v1/rpc/waitlist_count', {
-    method: 'POST',
-    headers: { 'apikey': ANON, 'Authorization': 'Bearer ' + ANON, 'Content-Type': 'application/json' },
-    body: '{}'
-  })
-    .then(function (r) { return r.ok ? r.json() : null; })
-    .then(function (n) {
-      if (typeof n !== 'number' || n < MIN) return;     // no number, no claim
-      document.getElementById('tallyN').textContent = n.toLocaleString();
-      document.getElementById('tally').hidden = false;
-    })
-    .catch(function () { /* stay hidden rather than show a wrong number */ });
+  /* the console: the app's three onboarding doors, real records */
+  var CH={
+    tour :{label:'A tour',           badge:'b-tour',  icon:'type-tour.svg',  photo:'ph-tour',
+           title:'W Hotel to The Royal Opera House', chip:'Nasra Al Manji',
+           line:'Follow a route of stories.'},
+    walk :{label:'Mindfulness walk', badge:'b-walk',  icon:'type-walk.svg',  photo:'ph-walk',
+           title:'Muttrah Mindful Breathing Walk',   chip:'Thomas Kleefeld',
+           line:'Join Breath-work facilitator Thomas Kleefeld, for this meditative stroll down the Corniche. And feel zen for the rest of your days exploration.'},
+    quest:{label:'A quest',          badge:'b-quest', icon:'type-quest.svg', photo:'ph-quest',
+           title:'Who Was Watching?',               chip:'Mirani Fort',
+           line:'Follow clues. Discover the story.'}
+  };
+  var el=function(id){return document.getElementById(id)};
+  [].forEach.call(document.querySelectorAll('.channels button'),function(btn){
+    btn.addEventListener('click',function(){
+      var c=CH[btn.dataset.ch]; if(!c) return;
+      [].forEach.call(document.querySelectorAll('.channels button'),function(o){o.setAttribute('aria-pressed', o===btn?'true':'false')});
+      [].forEach.call(document.querySelectorAll('.art>img'),function(i){i.classList.toggle('on', i.id===c.photo)});
+      el('cap-badge').className='badge '+c.badge;
+      el('cap-icon').src='img/brand/'+c.icon;
+      el('cap-k').textContent=c.label;
+      el('cap-t').textContent=c.title;
+      el('cap-chip').textContent=c.chip;
+      el('blurb').textContent=c.line;
+    });
+  });
 
-  // Signup → waitlist_entries. The table's trigger upserts to HubSpot on insert.
-  var form = document.getElementById('signup'),
-      mail = document.getElementById('email'),
-      go   = document.getElementById('go'),
-      note = document.getElementById('note');
+  /* waitlist */
+  var dlg=document.getElementById('dlg'), msg=document.getElementById('msg'), go=document.getElementById('go');
+  [].forEach.call(document.querySelectorAll('[data-open]'),function(b){
+    b.addEventListener('click',function(){ dlg.showModal(); document.getElementById('fn').focus(); });
+  });
+  document.getElementById('x').addEventListener('click',function(){dlg.close()});
+  dlg.addEventListener('click',function(e){ if(e.target===dlg) dlg.close(); });
 
-  form.addEventListener('submit', function (e) {
+  document.getElementById('wl').addEventListener('submit',function(e){
     e.preventDefault();
-    var v = mail.value.trim();
-    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)) { note.textContent = 'That email doesn’t look right — check it and try again.'; mail.focus(); return; }
+    var fn=document.getElementById('fn').value.trim(),
+        ln=document.getElementById('ln').value.trim(),
+        em=document.getElementById('em').value.trim();
+    if(!fn||!ln){ msg.textContent='Please add your first and last name.'; return; }
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)){ msg.textContent='That email doesn’t look right — check it and try again.'; return; }
+    go.disabled=true; go.textContent='Signing you up…'; msg.textContent='';
 
-    go.disabled = true; go.textContent = 'Adding…';
-    fetch(URL + '/rest/v1/waitlist_entries', {
-      method: 'POST',
-      headers: { 'apikey': ANON, 'Authorization': 'Bearer ' + ANON, 'Content-Type': 'application/json', 'Prefer': 'resolution=merge-duplicates' },
-      body: JSON.stringify({ email: v })
-    })
-      .then(function (r) {
-        if (r.ok) {
-          form.innerHTML = '<p style="font-weight:600">You’re on the list. We’ll be in touch once.</p>';
-          note.textContent = '';
-        } else {
-          go.disabled = false; go.textContent = 'Notify me';
-          note.textContent = 'That didn’t save. Try again, or email jassim@dauboman.com.';
-        }
-      })
-      .catch(function () {
-        go.disabled = false; go.textContent = 'Notify me';
-        note.textContent = 'No connection. Try again in a moment.';
-      });
+    // waitlist_entries stores EMAIL ONLY — first/last name need two new columns.
+    fetch(URL+'/rest/v1/waitlist_entries',{
+      method:'POST',
+      headers:{'apikey':ANON,'Authorization':'Bearer '+ANON,'Content-Type':'application/json','Prefer':'resolution=merge-duplicates'},
+      body:JSON.stringify({email:em})
+    }).then(function(r){
+      if(r.ok){
+        document.getElementById('wl').innerHTML='<p style="font-weight:700;font-size:18px">You’re on the list, '+fn.replace(/[<>&]/g,'')+'. We’ll be in touch.</p>';
+      }else{
+        go.disabled=false; go.textContent='Sign me up';
+        msg.textContent='That didn’t save. Try again, or email jas@sada.com.om.';
+      }
+    }).catch(function(){
+      go.disabled=false; go.textContent='Sign me up';
+      msg.textContent='No connection. Try again in a moment.';
+    });
   });
 })();
 </script>
-
 </body>
 </html>
