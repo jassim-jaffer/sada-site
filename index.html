@@ -160,6 +160,46 @@
     .howline span{display:block}
     .steps>div{margin-top:28px}
   }
+  /* ── phones only: tighten the page so the experiences sit higher
+        and the sections built for a wide screen keep their punch.
+        Nothing here reaches desktop. ── */
+  @media(max-width:600px){
+    /* top line: one label, on one line */
+    .kicker span:last-child{display:none}
+    .kicker{white-space:nowrap}
+    .hero{padding:24px 5% 48px}
+    .title{margin-top:24px}
+    .title .side{margin-top:16px}
+    .title .side b{font-size:19px;margin-bottom:4px}
+    .title .side p{font-size:17px}
+    /* the pin: smaller, so the three experiences come up the page */
+    .disc{width:74px;height:86px;margin-top:16px}
+    .draw{width:43px}
+    .console{margin-top:28px}
+    .art{min-height:320px}
+    .tuner{padding:22px}
+    .channels{margin:14px 0}
+    .channels button{padding:15px 0}
+    /* how it works: the line big again, the steps tight */
+    .how{padding:52px 5%}
+    .howline{font-size:clamp(40px,14vw,60px);line-height:.94;margin:18px 0 30px}
+    .steps{gap:0}
+    .steps>div{margin-top:24px}
+    .steps>div:first-child{margin-top:0}
+    .steps b{font-size:24px;margin-bottom:2px}
+    .steps h3{font-size:20px;margin-bottom:4px}
+    /* what is sada: number and title on one line, tighter */
+    .what{padding:52px 5%}
+    .what h2{margin:16px 0 28px}
+    .pts{gap:24px}
+    .pt .num{display:inline;margin:0 9px 0 0}
+    .pt b{display:inline;font-size:19px}
+    .pt p{margin-top:6px}
+    .why{padding:54px 5%}
+    .people{padding:0 5% 54px}
+    .pair{margin-top:28px;gap:26px}
+    .join{padding:52px 5%}
+  }
   @media(prefers-reduced-motion:reduce){
     html{scroll-behavior:auto}
     *,*:before,*:after{animation:none!important;transition:none!important}
