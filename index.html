@@ -7,7 +7,9 @@
 <meta name="description" content="Audio exploration. Voices linked to the exact place where you stand. Tours, mindfulness walks and quests across Oman.">
 <meta property="og:title" content="Sada — Hear the place">
 <meta property="og:description" content="Audio exploration. Voices linked to the exact place where you stand.">
-<meta property="og:image" content="img/doors/nasra-760.jpg">
+<meta property="og:image" content="https://sada.com.om/img/doors/nasra-760.jpg">
+<link rel="alternate" hreflang="en" href="https://sada.com.om/">
+<link rel="alternate" hreflang="ar" href="https://sada.com.om/ar">
 <meta name="theme-color" content="#0F1A14">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -209,6 +211,14 @@
     .pair{margin-top:28px;gap:26px}
     .join{padding:52px 5%}
   }
+  /* the smallest phones (320–359 px): the header still fits on one line */
+  @media(max-width:359px){
+    header{gap:8px;padding:12px 4%}
+    header .logo{height:44px}
+    .hdr-end{gap:10px}
+    .lang{font-size:13px}
+    .app-link{padding:8px 10px;font-size:12px}
+  }
   @media(prefers-reduced-motion:reduce){
     html{scroll-behavior:auto}
     *,*:before,*:after{animation:none!important;transition:none!important}
@@ -400,9 +410,9 @@
            line:'Follow a route of stories.'},
     walk :{label:'Mindfulness walk', badge:'b-walk',  icon:'type-walk.svg',  photo:'ph-walk',
            title:'Muttrah Mindful Breathing Walk',   chip:'Thomas Kleefeld',
-           line:'Join Breath-work facilitator Thomas Kleefeld, for this meditative stroll down the Corniche. And feel zen for the rest of your days exploration.'},
+           line:'Take a mindful walk.'},
     quest:{label:'A quest',          badge:'b-quest', icon:'type-quest.svg', photo:'ph-quest',
-           title:'Heritage Run Mirani Quest',      chip:'Al Mirani',
+           title:'Al Mirani Fort Quest',           chip:'Al Mirani Fort',
            line:'Follow clues. Discover the story.'}
   };
   var el=function(id){return document.getElementById(id)};

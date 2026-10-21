@@ -7,7 +7,7 @@
 <meta name="description" content="لكل مكان حكاية. قف، اضغط تشغيل، واسمعها.">
 <meta property="og:title" content="صدى — اسمع حكاية المكان">
 <meta property="og:description" content="لكل مكان حكاية. قف، اضغط تشغيل، واسمعها.">
-<meta property="og:image" content="img/doors/nasra-760.jpg">
+<meta property="og:image" content="https://sada.com.om/img/doors/nasra-760.jpg">
 <meta property="og:locale" content="ar_OM">
 <link rel="alternate" hreflang="en" href="https://sada.com.om/">
 <link rel="alternate" hreflang="ar" href="https://sada.com.om/ar">
@@ -17,12 +17,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=DM+Sans:wght@500;600&family=Space+Mono&display=swap" rel="stylesheet">
 <!--
   The Arabic page. Where every Arabic line comes from:
-  · Salwa's reviewed onboarding (Figma, 14 Oct 2026): the welcome, the question, the three doors' lines,
-    the walk's line, the three app coaches (استكشف / الخريطة / مساحتك).
+  · Salwa's final onboarding (Figma, reviewed 15 Oct 2026), copied byte for byte from the 6.0 app (app_ar.arb on integration):
+    the welcome, the question, the tour and quest doors' lines (ob2DoorTourSub, ob2DoorQuestSub),
+    the three app coaches (استكشاف / الخريطة / مساحتك; tabExplore, Jasim's SAD-221 ruling 19 Oct).
+  · The walk's line: Salwa's, from her Figma.
   · Salwa's strapline, Jasim 15 Oct 2026: «اسمع حكاية المكان».
   · The live quest's own record (hunts e51349ee…): «مغامرة التراث في قلعة الميراني», «الميراني».
-  · The app's Arabic (integration): «انضم إلى صدى», «البريد الإلكتروني», «لنبدأ», «حاول مجدداً», the two error lines.
-  · ONE line is a DRAFT for Salwa: the waitlist small print (marked below).
+  · The app's Arabic (integration): «انضم إلى صدى», «البريد الإلكتروني», «لنبدأ», «حاول مجددًا» (tourFinishRetry), the two error lines.
+  · Window-written, published 21 Oct on Jasim's word; Ziyana to check: the waitlist small print and the three
+    picture descriptions (both marked below).
   Kept short on purpose: sections with no Arabic yet (What is Sada, Why Sada, the founders) are left out
   rather than translated by a window.
 -->
@@ -156,6 +159,14 @@
     .steps>div:first-child{margin-top:0}
     .join{padding:50px 5%}
   }
+  /* the smallest phones (320–359 px): the header still fits on one line */
+  @media(max-width:359px){
+    header{gap:8px;padding:12px 4%}
+    header .logo{height:44px}
+    .hdr-end{gap:10px}
+    .lang{font-size:13px}
+    .app-link{padding:8px 10px;font-size:12.5px}
+  }
   @media(prefers-reduced-motion:reduce){
     html{scroll-behavior:auto}
     *,*:before,*:after{animation:none!important;transition:none!important}
@@ -196,13 +207,14 @@
   <!-- the three doors -->
   <div class="console" id="doors">
     <div class="art">
+      <!-- the three picture descriptions: published 21 Oct on Jasim's word; Ziyana to check -->
       <img id="ph-tour"  class="on" src="img/doors/nasra-760.jpg"     alt="دار الأوبرا السلطانية، مسقط">
       <img id="ph-walk"  src="img/doors/mindful-muttrah-760.jpg"      alt="كورنيش مطرح، مسقط">
       <img id="ph-quest" src="img/doors/heritage-run-mirani.png"      alt="قلعة الميراني">
       <div class="shade"></div>
       <div class="cap">
         <span class="badge b-tour" id="cap-badge"><i><img id="cap-icon" src="img/brand/type-tour.svg" alt=""></i><span id="cap-k">جولة</span></span>
-        <h2 id="cap-t">اتبع مسارًا واكتشف حكايات الأماكن.</h2>
+        <h2 id="cap-t">اتبع مسارًا مليئًا بالحكايات.</h2>
         <p class="line" id="cap-line"></p>
         <span class="chip" id="cap-chip"><span class="latin">Nasra Al Manji</span></span>
       </div>
@@ -224,9 +236,9 @@
 
 <!-- the app's three coaches -->
 <section class="how" id="how">
-  <div class="howline"><span>استكشف</span><span>الخريطة</span><span class="lime">مساحتك</span></div>
+  <div class="howline"><span>استكشاف</span><span>الخريطة</span><span class="lime">مساحتك</span></div>
   <div class="steps">
-    <div><b class="num">01</b><h3>استكشف</h3><p>جولات ومغامرات بانتظارك. اكتشفها واختر ما يثير فضولك.</p></div>
+    <div><b class="num">01</b><h3>استكشاف</h3><p>جولات ومغامرات بانتظارك. اكتشفها واختر ما يثير فضولك.</p></div>
     <div><b class="num">02</b><h3>الخريطة</h3><p>استكشف التجارب من حولك، وتعرّف على أماكنها على الخريطة.</p></div>
     <div><b class="num">03</b><h3>مساحتك</h3><p>أدر ملفك الشخصي وارجع لتجاربك من مكان واحد.</p></div>
   </div>
@@ -260,7 +272,7 @@
       <button class="submit" type="submit" id="go">لنبدأ</button>
     </form>
     <p class="msg" id="msg" role="status"></p>
-    <!-- DRAFT for Salwa — the only Arabic on this page a window wrote. Its job: the consent notice. -->
+    <!-- the consent notice: published 21 Oct on Jasim's word; Ziyana to check -->
     <p class="small">نراسلك فقط بأخبار صدى، ويمكنك إلغاء الاشتراك متى شئت. <a href="privacy.html" lang="en">Privacy</a></p>
   </div>
 </dialog>
@@ -273,11 +285,11 @@
   /* the three doors — Salwa's onboarding lines, and the live quest's own record */
   var CH={
     tour :{label:'جولة',      badge:'b-tour',  icon:'type-tour.svg',  photo:'ph-tour',
-           title:'اتبع مسارًا واكتشف حكايات الأماكن.', line:'', chip:'Nasra Al Manji', latin:true},
+           title:'اتبع مسارًا مليئًا بالحكايات.', line:'', chip:'Nasra Al Manji', latin:true},
     walk :{label:'مشية تأمل', badge:'b-walk',  icon:'type-walk.svg',  photo:'ph-walk',
            title:'تمشَّ واسترخِ مع تجربة تأمل صوتية.',  line:'', chip:'Thomas Kleefeld', latin:true},
     quest:{label:'مغامرة',    badge:'b-quest', icon:'type-quest.svg', photo:'ph-quest',
-           title:'مغامرة التراث في قلعة الميراني', line:'اتبع الأدلة، وحلّ الألغاز، واكتشف الحكاية.', chip:'الميراني', latin:false}
+           title:'مغامرة التراث في قلعة الميراني', line:'اتبع الأدلة، واكتشف الحكاية.', chip:'الميراني', latin:false}
   };
   var el=function(id){return document.getElementById(id)};
   [].forEach.call(document.querySelectorAll('.channels button'),function(btn){
@@ -316,7 +328,7 @@
       if(r.ok||r.status===409){
         el('wl').innerHTML='<p style="font-weight:900;font-size:24px">أهلًا بك في صدى</p>';
       }else{
-        go.disabled=false; go.textContent='لنبدأ'; msg.textContent='حاول مجدداً';
+        go.disabled=false; go.textContent='لنبدأ'; msg.textContent='حاول مجددًا';
       }
     }).catch(function(){
       go.disabled=false; go.textContent='لنبدأ'; msg.textContent='لا يوجد اتصال. تحقق من الإنترنت وحاول مجددًا.';
